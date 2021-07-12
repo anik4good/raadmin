@@ -1,4 +1,4 @@
-@extends('layouts.main') 
+@extends('layouts.backend.app') 
 @section('title', 'Clear Cache')
 @section('content')
     
@@ -30,7 +30,7 @@
         </div>
         <div class="row">
             <!-- start message area-->
-            @include('include.message')
+            @include('layouts.backend.partials.message')
             <!-- end message area-->
             <div class="col-md-12">
                 <div class="card ">

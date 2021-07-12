@@ -1,14 +1,16 @@
 <?php
 
+use App\Http\Controllers\Backend\SettingController;
+use App\Http\Controllers\Backend\PermissionController;
+use App\Http\Controllers\Backend\RolesController;
+use App\Http\Controllers\Backend\UserController;
+use App\Http\Controllers\Backend\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\UserController;
-use App\Http\Controllers\RolesController;
-use App\Http\Controllers\PermissionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,7 +21,7 @@ use App\Http\Controllers\PermissionController;
 | routes are loaded by the RouteServiceProvider within a group which
 | contains the "web" middleware group. Now create something great!
 |
-*/ 
+*/
 Route::get('/', function () { return view('home'); });
 
 
@@ -27,8 +29,8 @@ Route::get('login', [LoginController::class,'showLoginForm'])->name('login');
 Route::post('login', [LoginController::class,'login']);
 Route::post('register', [RegisterController::class,'register']);
 
-Route::get('password/forget',  function () { 
-	return view('pages.forgot-password'); 
+Route::get('password/forget',  function () {
+	return view('pages.forgot-password');
 })->name('password.forget');
 Route::post('password/email', [ForgotPasswordController::class,'sendResetLinkEmail'])->name('password.email');
 Route::get('password/reset/{token}', [ResetPasswordController::class,'showResetForm'])->name('password.reset');
@@ -40,9 +42,10 @@ Route::group(['middleware' => 'auth'], function(){
 	Route::get('/logout', [LoginController::class,'logout']);
 	Route::get('/clear-cache', [HomeController::class,'clearCache']);
 
-	// dashboard route  
-	Route::get('/dashboard', function () { 
-		return view('pages.dashboard'); 
+	// dashboard route
+	Route::get('/dashboard', function () {
+
+		return view('backend.dashboard');
 	})->name('dashboard');
 
 	//only those have manage_user permission will get access
@@ -75,6 +78,36 @@ Route::group(['middleware' => 'auth'], function(){
 		Route::get('/permission/update', [PermissionController::class,'update']);
 		Route::get('/permission/delete/{id}', [PermissionController::class,'delete']);
 	});
+
+
+
+    //only those have manage_permission permission will get access
+    Route::group(['middleware' => 'can:manage_setting|manage_user','as' => 'settings.', 'prefix' => 'settings'], function(){
+        Route::get('general', [SettingController::class, 'index'])->name('index');
+        Route::patch('general', [SettingController::class, 'update'])->name('update');
+
+        Route::get('appearance', [SettingController::class, 'appearance'])->name('appearance.index');
+        Route::patch('appearance', [SettingController::class, 'updateAppearance'])->name('appearance.update');
+
+        Route::get('mail', [SettingController::class, 'mail'])->name('mail.index');
+        Route::patch('mail', [SettingController::class, 'updateMailSettings'])->name('mail.update');
+
+        Route::get('socialite', [SettingController::class, 'socialite'])->name('socialite.index');
+        Route::patch('socialite', [SettingController::class, 'updateSocialiteSettings'])->name('socialite.update');
+        Route::get('clear/cache', [SettingController::class, 'clear_cache'])->name('cache.clear');
+    });
+
+
+
+	
+    //only those have manage_profile Profile will get access
+    Route::group(['middleware' => 'can:manage_profile|manage_user','as' => 'profile.', 'prefix' => 'profile'], function(){
+		Route::get('profile/', [ProfileController::class, 'index'])->name('index');
+		Route::post('profile/', [ProfileController::class, 'update'])->name('update');
+		Route::post('profile/store', [ProfileController::class, 'store'])->name('store');
+    });
+
+
 
 	// get permissions
 	Route::get('get-role-permissions-badge', [PermissionController::class,'getPermissionBadgeByRole']);

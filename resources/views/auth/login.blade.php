@@ -1,17 +1,17 @@
 <!doctype html>
 <html class="no-js" lang="en">
-    <head> 
+    <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
         <title>Login | Laravel Admin Starter Kit - Radmin</title>
         <meta name="description" content="">
         <meta name="keywords" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        
+
         <link rel="icon" href="{{ asset('favicon.png') }}" type="image/x-icon" />
 
         <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:300,400,600,700,800" rel="stylesheet">
-        
+
         <link rel="stylesheet" href="{{ asset('plugins/bootstrap/dist/css/bootstrap.min.css') }}">
         <link rel="stylesheet" href="{{ asset('plugins/fontawesome-free/css/all.min.css') }}">
         <link rel="stylesheet" href="{{ asset('plugins/ionicons/dist/css/ionicons.min.css') }}">
@@ -39,7 +39,7 @@
                             <form method="POST" action="{{ route('login') }}">
                             @csrf
                                 <div class="form-group">
-                                    <input id="email" type="email" placeholder="Email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+                                    <input id="email" type="email" placeholder="Email" class="form-control @error('email') is-invalid @enderror" name="email" value="admin@mail.com" required autocomplete="email" autofocus>
                                     <i class="ik ik-user"></i>
                                     @error('email')
                                         <span class="invalid-feedback" role="alert">
@@ -48,7 +48,7 @@
                                     @enderror
                                 </div>
                                 <div class="form-group">
-                                    <input id="password" type="password" placeholder="Password" class="form-control @error('password') is-invalid @enderror" name="password" required>
+                                    <input id="password" type="password" placeholder="Password" class="form-control @error('password') is-invalid @enderror" name="password"  value="password" required>
                                     <i class="ik ik-lock"></i>
                                     @error('password')
                                     <span class="invalid-feedback" role="alert">
@@ -75,19 +75,19 @@
                                 <div class="register">
                                     <p>{{ __('No account?')}} <a href="{{url('register')}}">{{ __('Sign Up')}}</a></p>
                                 </div>
-                                
+
                             </form>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        
+
         <script src="{{ asset('src/js/vendor/jquery-3.3.1.min.js') }}"></script>
         <script src="{{ asset('plugins/popper.js/dist/umd/popper.min.js') }}"></script>
         <script src="{{ asset('plugins/bootstrap/dist/js/bootstrap.min.js') }}"></script>
         <script src="{{ asset('plugins/perfect-scrollbar/dist/perfect-scrollbar.min.js') }}"></script>
         <script src="{{ asset('plugins/screenfull/dist/screenfull.js') }}"></script>
-        
+
     </body>
 </html>

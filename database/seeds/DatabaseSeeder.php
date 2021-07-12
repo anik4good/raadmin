@@ -1,8 +1,11 @@
 <?php
 
 use App\User;
+use Database\Seeders\UserSeeder;
 use Illuminate\Database\Seeder;
-/** @var \Illuminate\Database\Eloquent\Factory $factory */
+use Illuminate\Support\Facades\DB;
+
+
 class DatabaseSeeder extends Seeder
 {
     /**
@@ -12,7 +15,10 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // $this->call(UsersTableSeeder::class);
+         $this->call(UserSeeder::class);
      //   $user = User::factory()->make(100);
+
+
+
     }
 }
