@@ -1,19 +1,35 @@
-@extends('layouts.main')
+@extends('layouts.backend.app')
 
 @section('title','Mail Settings')
 
 @section('content')
-    <div class="app-page-title">
-        <div class="page-title-wrapper">
-            <div class="page-title-heading">
-                <div class="page-title-icon">
-                    <i class="pe-7s-settings icon-gradient bg-mean-fruit">
-                    </i>
+    <div class="container-fluid">
+
+        <div class="page-header">
+            <div class="row align-items-end">
+                <div class="col-lg-8">
+                    <div class="page-header-title">
+                        <i class="ik ik-settings bg-blue"></i>
+                        <div class="d-inline">
+                            <h5>{{ __('Settings')}}</h5>
+                            <span>{{ __('Define settings of Application')}}</span>
+                        </div>
+                    </div>
                 </div>
-                <div>Mail Settings</div>
+                <div class="col-lg-4">
+                    <nav class="breadcrumb-container" aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item">
+                                <a href="{{route('dashboard')}}"><i class="ik ik-home"></i></a>
+                            </li>
+                            <li class="breadcrumb-item">
+                                <a href="#">{{ __('Settings')}}</a>
+                            </li>
+                        </ol>
+                    </nav>
+                </div>
             </div>
         </div>
-    </div>
 
     <div class="row">
         <div class="col-md-3">
@@ -168,4 +184,5 @@
         </div>
     </div>
     <!-- /.row -->
+    </div>
 @endsection

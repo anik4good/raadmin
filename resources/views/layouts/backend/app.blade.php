@@ -6,6 +6,9 @@
 
 	@include('layouts.backend.partials.head')
 
+<!-- Stack array for including inline css -->
+    @stack('css')
+
 </head>
 
 <body id="app" >
@@ -23,7 +26,7 @@
 	    	</div>
 
 	    	<!-- initiate chat section-->
-			@include('layouts.backend.partials.chat')
+{{--			@include('layouts.backend.partials.chat')--}}
 
 
 	    	<!-- initiate footer section-->
@@ -41,11 +44,12 @@
     </div>
 
 	<!-- initiate modal menu section-->
-	@include('layouts.backend.partials.modalmenu')
+{{--	@include('layouts.backend.partials.modalmenu')--}}
 
 	<!-- initiate scripts-->
 	@include('layouts.backend.partials.script')
 
-
+    <!-- Stack array for including inline script -->
+    @stack('js')
 </body>
 </html>

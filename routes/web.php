@@ -48,6 +48,13 @@ Route::group(['middleware' => 'auth'], function(){
 		return view('backend.dashboard');
 	})->name('dashboard');
 
+
+    // Demo route
+    Route::get('/demo', function () {
+
+        return view('backend.demo');
+    })->name('demo');
+
 	//only those have manage_user permission will get access
 	Route::group(['middleware' => 'can:manage_user'], function(){
 	Route::get('/users', [UserController::class,'index']);
@@ -81,7 +88,7 @@ Route::group(['middleware' => 'auth'], function(){
 
 
 
-    //only those have manage_permission permission will get access
+    //only those have manage_setting permission will get access
     Route::group(['middleware' => 'can:manage_setting|manage_user','as' => 'settings.', 'prefix' => 'settings'], function(){
         Route::get('general', [SettingController::class, 'index'])->name('index');
         Route::patch('general', [SettingController::class, 'update'])->name('update');
@@ -99,13 +106,17 @@ Route::group(['middleware' => 'auth'], function(){
 
 
 
-	
+
     //only those have manage_profile Profile will get access
-    Route::group(['middleware' => 'can:manage_profile|manage_user','as' => 'profile.', 'prefix' => 'profile'], function(){
+    Route::group(['middleware' => 'can:manage_profile','as' => 'profile.', 'prefix' => 'profile'], function(){
 		Route::get('profile/', [ProfileController::class, 'index'])->name('index');
 		Route::post('profile/', [ProfileController::class, 'update'])->name('update');
 		Route::post('profile/store', [ProfileController::class, 'store'])->name('store');
     });
+
+
+
+
 
 
 

@@ -6,6 +6,7 @@ use App\Http\Requests\Profile\UpdatePasswordRequest;
 use App\Http\Requests\Profile\UpdateProfileRequest;
 use App\Http\Controllers\Controller;
 use App\Models\Userprofile;
+use App\Profile;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -25,42 +26,6 @@ class ProfileController extends Controller
     public function store(Request $request)
     {
         return $request;
-        //get data
-        $age = $request->age;
-        $weight = $request->weight;
-        $height = $request->height;
-        $waist = $request->waist;
-
-        //bmi done
-        $bmi = bmi($weight,$height);
-        $bmi2 = bmi_weight($bmi);
-        echo 'bmi: '.$bmi;
-        echo '<br>';
-        echo 'bmi status: '.$bmi2;
-        echo '<br>';
-
-        // Body Fat (BMI method)
-        $bodyfat = body_fat($age,$bmi);
-        echo ' bodyfat:'.$bodyfat;
-        echo '<br>';
-
-        //Ponderal Index in KG done
-        $pi = pindex($weight,$height);
-        echo ' Ponderal Index:'.$pi;
-        echo '<br>';
-
-//        Basal Metabolic Rate (BMR)
-        $bmr = bmr($weight,$height,$age);
-        echo ' BMR:'.$bmr.' Calories/day';
-        echo '<br>';
-
-//        Body Surface Area:(Mosteller formula:)
-        $bsa = bsa($weight,$height,$age);
-        echo ' BSA:'.$bsa.'m2';
-        echo '<br>';
-
-
-
 
 
     }
@@ -74,7 +39,7 @@ class ProfileController extends Controller
 
         // Get logged in user
         $user = Auth::user();
-        $userprofile = Userprofile::where('user_id', Auth::id())->first();
+        $userprofile = Profile::where('user_id', Auth::id())->first();
         // Update user info
         $user->update([
             'name' => $request->name,
@@ -85,25 +50,7 @@ class ProfileController extends Controller
             $user->addMedia($request->avatar)->toMediaCollection('avatar');
         }
 
-        //get data
-        $weight = $request->weight;
-        //convert feet to cm
-        $cm = 2.54*($request->feet*12+$request->inch);
-        $height = $cm;
-        $age = $request->age;
-        $gender = $request->gender;
 
-        //bmi done
-        $bmi = bmi($weight, $height);
-        $bmi2 = bmi_weight($bmi);
-        // Body Fat (BMI method)
-        $bodyfat = body_fat($userprofile->age, $bmi);
-        //Ponderal Index in KG done
-        $pi = pindex($weight, $height);
-//        Basal Metabolic Rate (BMR)
-        $bmr = bmr($weight, $height, $userprofile->age);
-//        Body Surface Area:(Mosteller formula:)
-        $bsa = bsa($weight, $height);
         if (empty($userprofile->bmi)) {
             $userprofile->update([
                 'user_id' => $userprofile->user_id,

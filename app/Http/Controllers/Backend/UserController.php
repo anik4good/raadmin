@@ -136,7 +136,7 @@ class UserController extends Controller
                 $user_role = $user->roles->first();
                 $roles     = Role::pluck('name','id');
 
-                return view('user-edit', compact('user','user_role','roles'));
+                return view('backend.users.user-edit', compact('user','user_role','roles'));
             }else{
                 return redirect('404');
             }

@@ -1,4 +1,4 @@
-@extends('layouts.main')
+@extends('layouts.backend.app')
 
 @section('title','General Settings')
 
