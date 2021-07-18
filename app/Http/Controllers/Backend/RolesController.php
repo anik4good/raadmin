@@ -124,7 +124,7 @@ class RolesController extends Controller
 
             $permissions = Permission::pluck('name','id');
 
-            return view('edit-roles', compact('role','role_permission','permissions'));
+            return view('backend.roles.edit-roles', compact('role','role_permission','permissions'));
         }else{
             return redirect('404');
         }

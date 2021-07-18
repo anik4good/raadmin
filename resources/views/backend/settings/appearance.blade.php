@@ -1,8 +1,15 @@
 @extends('layouts.backend.app')
-
 @section('title','Appearance Settings')
-
 @section('content')
+    <!-- push external head elements to head -->
+    @push('head')
+        <!--Dropify css-->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Dropify/0.2.2/css/dropify.min.css"
+              integrity="sha512-EZSUkJWTjzDlspOoPSpUFR0o0Xy7jdzW//6qhUkoZ9c4StFkVsp9fbbd0O06p9ELS3H486m4wmrCELjza4JEog=="
+              crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    @endpush
+
+
     <div class="container-fluid">
 
         <div class="page-header">
@@ -95,4 +102,20 @@
             </div>
             <!-- /.row -->
     </div>
+
+
+    <!-- push external js -->
+    @push('script')
+        <!--Dropify script-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Dropify/0.2.2/js/dropify.min.js"
+                integrity="sha512-8QFTrG0oeOiyWo/VM9Y8kgxdlCryqhIxVeRpWSezdRRAvarxVtwLnGroJgnVW9/XBRduxO/z1GblzPrMQoeuew=="
+                crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script>
+            $(document).ready(function () {
+                // Dropify
+                $('.dropify').dropify();
+
+            });
+        </script>
+    @endpush
 @endsection

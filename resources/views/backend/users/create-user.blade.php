@@ -1,12 +1,16 @@
-@extends('layouts.backend.app') 
+@extends('layouts.backend.app')
 @section('title', 'Add User')
 @section('content')
     <!-- push external head elements to head -->
     @push('head')
         <link rel="stylesheet" href="{{ asset('plugins/select2/dist/css/select2.min.css') }}">
+
+        <!--Dropify css-->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Dropify/0.2.2/css/dropify.min.css" integrity="sha512-EZSUkJWTjzDlspOoPSpUFR0o0Xy7jdzW//6qhUkoZ9c4StFkVsp9fbbd0O06p9ELS3H486m4wmrCELjza4JEog==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
     @endpush
 
-    
+
     <div class="container-fluid">
     	<div class="page-header">
             <div class="row align-items-end">
@@ -43,7 +47,7 @@
                         <h3>{{ __('Add user')}}</h3>
                     </div>
                     <div class="card-body">
-                        <form class="forms-sample" method="POST" action="{{ route('create-user') }}" >
+                        <form class="forms-sample" method="POST" action="{{ route('create-user') }}" enctype="multipart/form-data">
                         @csrf
                             <div class="row">
                                 <div class="col-sm-6">
@@ -70,7 +74,7 @@
                                             </span>
                                         @enderror
                                     </div>
-                                   
+
                                     <div class="form-group">
                                         <label for="password">{{ __('Password')}}<span class="text-red">*</span></label>
                                         <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" placeholder="Enter password" required>
@@ -87,11 +91,11 @@
                                         <input id="password-confirm" type="password" class="form-control" name="password_confirmation" placeholder="Retype password" required>
                                         <div class="help-block with-errors"></div>
                                     </div>
-                                    
-                                    
-                                    
-                                    
-                                
+
+
+
+
+
                                 </div>
                                 <div class="col-md-6">
                                     <!-- Assign role & view role permisions -->
@@ -106,14 +110,33 @@
                                         </div>
                                         <input type="hidden" id="token" name="token" value="{{ csrf_token() }}">
                                     </div>
+
+                                    <div class="form-group" >
+                                        <div class="main-card mb-3 card">
+                                            <div class="card-body">
+                                                <input type="file" name="avatar" id="avatar"
+                                                       class="dropify" required>
+
+{{--                                                <input type="file" name="avatar" id="avatar"--}}
+{{--                                                       class="dropify"--}}
+{{--                                                       data-default-file="{{ Auth::user()->getFirstMediaUrl('avatar','thumb') ?? '' }}">--}}
+                                            </div>
+                                            <!-- /.card-body -->
+                                        </div>
+                                        <!-- /.card -->
+                                    </div>
                                 </div>
+
+
+
+
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <button type="submit" class="btn btn-primary">{{ __('Submit')}}</button>
                                     </div>
                                 </div>
                             </div>
-                        
+
                         </form>
                     </div>
                 </div>
@@ -121,9 +144,21 @@
         </div>
     </div>
     <!-- push external js -->
-    @push('script') 
+    @push('script')
         <script src="{{ asset('plugins/select2/dist/js/select2.min.js') }}"></script>
          <!--get role wise permissiom ajax script-->
         <script src="{{ asset('js/get-role.js') }}"></script>
+
+
+        <!--Dropify script-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Dropify/0.2.2/js/dropify.min.js" integrity="sha512-8QFTrG0oeOiyWo/VM9Y8kgxdlCryqhIxVeRpWSezdRRAvarxVtwLnGroJgnVW9/XBRduxO/z1GblzPrMQoeuew==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script>
+            $(document).ready(function() {
+            // Dropify
+                $('.dropify').dropify();
+
+            });
+        </script>
+
     @endpush
 @endsection

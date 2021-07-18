@@ -41,6 +41,28 @@ class UserController extends Controller
         $data  = User::get();
 
         return Datatables::of($data)
+
+            ->addColumn('name', function($data){
+                $name = $data->name;
+                if($data->hasRole('SuperAdmin'))
+                {
+                    $image = asset('img/super_admin.jpg');
+                }
+                else
+                {
+                    $image = $data->getFirstMediaUrl('avatar') != null ? $data->getFirstMediaUrl('avatar','thumb') : config('app.placeholder').'160';
+                }
+
+                $badge = '';
+                if($name){
+                    $badge =  $name.'   <img width="40" class="rounded-circle"
+                                                             src="'.$image.'" alt="User Avatar">';
+                }
+
+                return $badge;
+            })
+
+
                 ->addColumn('roles', function($data){
                     $roles = $data->getRoleNames()->toArray();
                     $badge = '';
@@ -59,20 +81,20 @@ class UserController extends Controller
 
                     return $badges;
                 })
-                ->addColumn('action', function($data){
-                    if($data->name == 'Super Admin'){
-                        return '';
-                    }
-                    if (Auth::user()->can('manage_user')){
-                        return '<div class="table-actions">
+            ->addColumn('action', function($data){
+                if($data->name == 'SuperAdmin'){
+                    return '';
+                }
+                if (Auth::user()->can('manage_user')){
+                    return '<div class="table-actions">
                                 <a href="'.url('user/'.$data->id).'" ><i class="ik ik-edit-2 f-16 mr-15 text-green"></i></a>
                                 <a href="'.url('user/delete/'.$data->id).'"><i class="ik ik-trash-2 f-16 text-red"></i></a>
                             </div>';
-                    }else{
-                        return '';
-                    }
-                })
-                ->rawColumns(['roles','permissions','action'])
+                }else{
+                    return '';
+                }
+            })
+                ->rawColumns(['name','roles','permissions','action'])
                 ->make(true);
     }
 
@@ -92,6 +114,7 @@ class UserController extends Controller
 
     public function store(Request $request)
     {
+
         // create user
         $validator = Validator::make($request->all(), [
             'name'     => 'required | string ',
@@ -114,6 +137,11 @@ class UserController extends Controller
 
             // assign new role to the user
             $user->syncRoles($request->role);
+
+            // upload images
+            if ($request->hasFile('avatar')) {
+                $user->addMedia($request->avatar)->toMediaCollection('avatar');
+            }
 
             if($user){
                 return redirect('users')->with('success', 'New user created!');
@@ -149,6 +177,7 @@ class UserController extends Controller
 
     public function update(Request $request)
     {
+
 
         // update user info
         $validator = Validator::make($request->all(), [
@@ -187,6 +216,11 @@ class UserController extends Controller
 
             // sync user role
             $user->syncRoles($request->role);
+
+            // upload images
+            if ($request->hasFile('avatar')) {
+                $user->addMedia($request->avatar)->toMediaCollection('avatar');
+            }
 
             return redirect()->back()->with('success', 'User information updated succesfully!');
         }catch (\Exception $e) {

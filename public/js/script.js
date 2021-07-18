@@ -36,7 +36,7 @@ function resetForm(formId) {
 }
 
 $(document).ready(function() {
-    // Dropify
+   //  Dropify
    // $('.dropify').dropify();
 
     // Select2

@@ -1,17 +1,20 @@
 <?php
 
 namespace App;
-
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Spatie\Permission\Traits\HasRoles;
 use Laravel\Passport\HasApiTokens;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 
-class User extends Authenticatable
+class User extends Authenticatable implements HasMedia
 {
-    use HasApiTokens,Notifiable,HasRoles,HasFactory ;
+    use HasApiTokens,Notifiable,HasRoles,HasFactory,InteractsWithMedia ;
 
     /**
      * The attributes that are mass assignable.
@@ -48,5 +51,37 @@ class User extends Authenticatable
         }
 
         return $roles;
+    }
+
+
+    public function get_roles_single(){
+         $roles =$this->getRoleNames()->toArray();
+        $role = '';
+        if($roles){
+            $role = implode(' , ', $roles);
+        }
+
+        return $role;
+    }
+
+
+    public function registerMediaCollections() : void
+    {
+        $this->addMediaCollection('avatar')
+            ->singleFile()
+            ->useFallbackUrl(config('app.placeholder').'160.png')
+            ->useFallbackPath(config('app.placeholder').'160.png')
+            ->registerMediaConversions(function (Media $media) {
+                $this
+                    ->addMediaConversion('thumb')
+                    ->width(160)
+                    ->height(160);
+            });
+    }
+
+
+    public function profile()
+    {
+        return $this->hasOne(User::class);
     }
 }

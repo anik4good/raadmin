@@ -19,10 +19,10 @@
         "laravelcollective/html": "^6.1",
         "mckenziearts/laravel-notify": "^2.2",
         "mews/purifier": "^3.2",
-        "spatie/laravel-permission": "^3.11",
+        "spatie/laravel-permission": "^4.2.0",
         "yajra/laravel-datatables-oracle": "~9.0",
         "spatie/laravel-backup": "^6.9",
-        "spatie/laravel-medialibrary": "^8.0.0",
+        "spatie/laravel-medialibrary": "^9.6.4",
         "browner12/helpers": "^3.1",
         "imliam/laravel-env-set-command": "^1.1"
     },

@@ -12,15 +12,19 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 
 class ProfileController extends Controller
 {
     public function index()
     {
-        return view('backend.profile');
+
+        $profile = Profile::with('user')->first();
+
+        //  return $profile->user->get_roles_single();
+
+        return view('backend.profile', compact('profile'));
     }
-
-
 
 
     public function store(Request $request)
@@ -29,8 +33,6 @@ class ProfileController extends Controller
 
 
     }
-
-
 
 
     public function update(UpdateProfileRequest $request)
@@ -76,7 +78,7 @@ class ProfileController extends Controller
             ]);
             // return with success msg
             notify()->success('Profile Successfully Updated.', 'Updated');
-           // return redirect()->back();
+            // return redirect()->back();
             return redirect()->route('app.profile.index');
         } else if ($userprofile->weight == $weight && $userprofile->height == $height && $userprofile->age == $age) {
             notify()->warning('Nothing is Update', 'Warning');
@@ -114,29 +116,36 @@ class ProfileController extends Controller
 
     }
 
-    public function changePassword()
+    public function updatePassword(Request $request)
     {
-        Gate::authorize('app.profile.password');
-        return view('backend.profile.security');
-    }
-
-    public function updatePassword(UpdatePasswordRequest $request)
-    {
-        $hashedPassword = Auth::user()->password;
-        if (Hash::check($request->current_password, $hashedPassword)) {
-            if (!Hash::check($request->password, $hashedPassword)) {
-                Auth::user()->update([
-                    'password' => Hash::make($request->password)
-                ]);
-                Auth::logout();
-                notify()->success('Password Successfully Changed.', 'Success');
-                return redirect()->route('login');
-            } else {
-                notify()->warning('New password cannot be the same as old password.', 'Warning');
-            }
-        } else {
-            notify()->error('Current password not match.', 'Error');
+        // check validation for password match
+        if(isset($request->password)){
+            $validator = Validator::make($request->all(), [
+                'password' => 'required | confirmed'
+            ]);
         }
-        return redirect()->back();
+
+        if ($validator->fails()) {
+            notify()->error('New password not matched.', 'Error');
+            return redirect()->back();
+        }
+
+            $hashedPassword = Auth::user()->password;
+            if (Hash::check($request->current_password, $hashedPassword)) {
+                if (!Hash::check($request->password, $hashedPassword)) {
+                    Auth::user()->update([
+                        'password' => Hash::make($request->password)
+                    ]);
+                    notify()->success('Password Successfully Changed.', 'Success');
+                    Auth::logout();
+                    return redirect()->route('login');
+                } else {
+                    notify()->warning('New password cannot be the same as old password.', 'Warning');
+                }
+            } else {
+                notify()->error('Current password not match.', 'Error');
+            }
+            return redirect()->back();
+
     }
 }
