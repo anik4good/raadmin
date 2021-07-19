@@ -31,15 +31,7 @@
 
 	    	<!-- initiate footer section-->
 			@include('layouts.backend.partials.footer')
-            @notifyCss
-            <style>
-                .inset-0 {
-                    top: 39px;
-                    right: 0;
-                    bottom: 0;
-                    left: 0;
-                }
-            </style>
+
     	</div>
     </div>
 

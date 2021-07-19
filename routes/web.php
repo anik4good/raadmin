@@ -1,5 +1,7 @@
 <?php
 
+
+use App\Http\Controllers\Backend\BackupController;
 use App\Http\Controllers\Backend\SettingController;
 use App\Http\Controllers\Backend\PermissionController;
 use App\Http\Controllers\Backend\RolesController;
@@ -89,7 +91,7 @@ Route::group(['middleware' => 'auth'], function(){
 
 
     //only those have manage_setting permission will get access
-    Route::group(['middleware' => 'can:manage_setting|manage_user','as' => 'settings.', 'prefix' => 'settings'], function(){
+    Route::group(['middleware' => 'can:manage_setting','as' => 'settings.', 'prefix' => 'settings'], function(){
         Route::get('general', [SettingController::class, 'index'])->name('index');
         Route::patch('general', [SettingController::class, 'update'])->name('update');
 
@@ -102,6 +104,15 @@ Route::group(['middleware' => 'auth'], function(){
         Route::get('socialite', [SettingController::class, 'socialite'])->name('socialite.index');
         Route::patch('socialite', [SettingController::class, 'updateSocialiteSettings'])->name('socialite.update');
         Route::get('clear/cache', [SettingController::class, 'clear_cache'])->name('cache.clear');
+    });
+
+
+    //only those have manage_backup permission will get access
+    Route::group(['middleware' => 'can:manage_backup','as' => 'settings.', 'prefix' => 'settings'], function(){
+        // Backups
+        Route::resource('backups', BackupController::class)->only(['index', 'store', 'destroy']);
+        Route::get('backups/{file_name}', [BackupController::class, 'download'])->name('backups.download');
+        Route::delete('backups', [BackupController::class, 'clean'])->name('backups.clean');
     });
 
 

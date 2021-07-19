@@ -38,6 +38,7 @@ class UserSeeder extends Seeder
             ['id' => 3, 'name' => 'manage_permission', 'guard_name' => 'web', 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()],
             ['id' => 4, 'name' => 'manage_user', 'guard_name' => 'web', 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()],
             ['id' => 5, 'name' => 'manage_profile', 'guard_name' => 'web', 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()],
+            ['id' => 6, 'name' => 'manage_backup', 'guard_name' => 'web', 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()],
 
         ];
 

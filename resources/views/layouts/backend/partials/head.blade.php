@@ -17,10 +17,19 @@
 <link rel="stylesheet" href="{{ asset('plugins/fontawesome-free/css/all.min.css') }}">
 <link rel="stylesheet" href="{{ asset('plugins/icon-kit/dist/css/iconkit.min.css') }}">
 <link rel="stylesheet" href="{{ asset('plugins/ionicons/dist/css/ionicons.min.css') }}">
-
+@notifyCss
+<style>
+    .inset-0 {
+        top: 39px;
+        right: 0;
+        bottom: 0;
+        left: 0;
+    }
+</style>
 
 <!-- Stack array for including inline css or head elements -->
 @stack('head')
 
 <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+
 

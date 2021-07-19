@@ -26,7 +26,7 @@
                     <a href="{{route('dashboard')}}"><i class="ik ik-bar-chart-2"></i><span>{{ __('Dashboard')}}</span></a>
                 </div>
                 <div
-                    class="nav-item {{ ($segment1 == 'users' || $segment1 == 'roles'||$segment1 == 'permission' ||$segment1 == 'settings'||$segment1 == 'profile'||$segment1 == 'user') ? 'active open' : '' }} has-sub">
+                    class="nav-item {{ ($segment1 == 'users' || $segment1 == 'roles'||$segment1 == 'permission' ||$segment1 == 'settings'||$segment1 == 'backups'||$segment1 == 'profile'||$segment1 == 'user') ? 'active open' : '' }} has-sub">
                     <a href="#"><i class="ik ik-user"></i><span>{{ __('Adminstrator')}}</span></a>
                     <div class="submenu-content">
                     @can('manage_user')
@@ -58,6 +58,12 @@
                         @can('manage_setting')
                             <a href="{{route('settings.appearance.index')}}"
                                class="menu-item {{ ($segment1 == 'settings') ? 'active' : '' }}">{{ __('Setting')}}</a>
+                        @endcan
+
+                    <!-- only those have manage_setting permission will get access -->
+                        @can('manage_backup')
+                            <a href="{{route('settings.backups.index')}}"
+                               class="menu-item {{ ($segment1 == 'backups') ? 'active' : '' }}">{{ __('backups')}}</a>
                         @endcan
                     </div>
                 </div>

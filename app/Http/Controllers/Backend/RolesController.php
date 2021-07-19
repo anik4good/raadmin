@@ -55,15 +55,16 @@ class RolesController extends Controller
                     $badges = '';
                     foreach ($roles as $key => $role) {
                         $badges .= '<span class="badge badge-dark m-1">'.$role->name.'</span>';
+
                     }
-                    if($data->name == 'Super Admin'){
+                    if($data->name == 'SuperAdmin'){
                         return '<span class="badge badge-success m-1">All permissions</span>';
                     }
 
                     return $badges;
                 })
                 ->addColumn('action', function($data){
-                    if($data->name == 'Super Admin'){
+                    if($data->name == 'SuperAdmin'){
                         return '';
                     }
                     if (Auth::user()->can('manage_roles')){

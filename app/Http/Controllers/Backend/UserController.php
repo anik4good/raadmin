@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Hash;
 use App\User;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
-use DataTables,Auth;
+use DataTables, Auth;
 
 class UserController extends Controller
 {
@@ -38,74 +38,69 @@ class UserController extends Controller
     public function getUserList(Request $request)
     {
 
-        $data  = User::get();
+        $data = User::get();
 
         return Datatables::of($data)
-
-            ->addColumn('name', function($data){
+            ->addColumn('name', function ($data) {
                 $name = $data->name;
-                if($data->hasRole('SuperAdmin'))
-                {
+                if ($data->hasRole('SuperAdmin')) {
                     $image = asset('img/super_admin.jpg');
-                }
-                else
-                {
-                    $image = $data->getFirstMediaUrl('avatar') != null ? $data->getFirstMediaUrl('avatar','thumb') : config('app.placeholder').'160';
+                } else {
+                    $image = $data->getFirstMediaUrl('avatar') != null ? $data->getFirstMediaUrl('avatar', 'thumb') : config('app.placeholder') . '160';
                 }
 
                 $badge = '';
-                if($name){
-                    $badge =  $name.'   <img width="40" class="rounded-circle"
-                                                             src="'.$image.'" alt="User Avatar">';
+                if ($name) {
+                    $badge = $name . '   <img width="40" class="rounded-circle"
+                                                             src="' . $image . '" alt="User Avatar">';
                 }
 
                 return $badge;
             })
+            ->addColumn('roles', function ($data) {
+                $roles = $data->getRoleNames()->toArray();
+                $badge = '';
+                if ($roles) {
+                    $badge = implode(' , ', $roles);
+                }
 
-
-                ->addColumn('roles', function($data){
-                    $roles = $data->getRoleNames()->toArray();
-                    $badge = '';
-                    if($roles){
-                        $badge = implode(' , ', $roles);
-                    }
-
-                    return $badge;
-                })
-                ->addColumn('permissions', function($data){
-                    $roles = $data->getAllPermissions();
-                    $badges = '';
-                    foreach ($roles as $key => $role) {
-                        $badges .= '<span class="badge badge-dark m-1">'.$role->name.'</span>';
-                    }
-
-                    return $badges;
-                })
-            ->addColumn('action', function($data){
-                if($data->name == 'SuperAdmin'){
+                return $badge;
+            })
+            ->addColumn('permissions', function ($data) {
+                $roles = $data->getAllPermissions();
+                $badges = '';
+                foreach ($roles as $key => $role) {
+                    $badges .= '<span class="badge badge-dark m-1">' . $role->name . '</span>';
+                }
+                if ($data->name == 'SuperAdmin') {
+                    return '<span class="badge badge-success m-1">All permissions</span>';
+                }
+                return $badges;
+            })
+            ->addColumn('action', function ($data) {
+                if ($data->get_roles_single() == 'SuperAdmin') {
                     return '';
                 }
-                if (Auth::user()->can('manage_user')){
+                if (Auth::user()->can('manage_user')) {
                     return '<div class="table-actions">
-                                <a href="'.url('user/'.$data->id).'" ><i class="ik ik-edit-2 f-16 mr-15 text-green"></i></a>
-                                <a href="'.url('user/delete/'.$data->id).'"><i class="ik ik-trash-2 f-16 text-red"></i></a>
+                                <a href="' . url('user/' . $data->id) . '" ><i class="ik ik-edit-2 f-16 mr-15 text-green"></i></a>
+                                <a href="' . url('user/delete/' . $data->id) . '"><i class="ik ik-trash-2 f-16 text-red"></i></a>
                             </div>';
-                }else{
+                } else {
                     return '';
                 }
             })
-                ->rawColumns(['name','roles','permissions','action'])
-                ->make(true);
+            ->rawColumns(['name', 'roles', 'permissions', 'action'])
+            ->make(true);
     }
 
     public function create()
     {
-        try
-        {
-            $roles = Role::pluck('name','id');
+        try {
+            $roles = Role::pluck('name', 'id');
             return view('backend.users.create-user', compact('roles'));
 
-        }catch (\Exception $e) {
+        } catch (\Exception $e) {
             $bug = $e->getMessage();
             return redirect()->back()->with('error', $bug);
 
@@ -117,23 +112,22 @@ class UserController extends Controller
 
         // create user
         $validator = Validator::make($request->all(), [
-            'name'     => 'required | string ',
-            'email'    => 'required | email | unique:users',
+            'name' => 'required | string ',
+            'email' => 'required | email | unique:users',
             'password' => 'required | confirmed',
-            'role'     => 'required'
+            'role' => 'required'
         ]);
 
-        if($validator->fails()) {
+        if ($validator->fails()) {
             return redirect()->back()->withInput()->with('error', $validator->messages()->first());
         }
-        try
-        {
+        try {
             // store user information
             $user = User::create([
-                        'name'     => $request->name,
-                        'email'    => $request->email,
-                        'password' => Hash::make($request->password),
-                    ]);
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => Hash::make($request->password),
+            ]);
 
             // assign new role to the user
             $user->syncRoles($request->role);
@@ -143,12 +137,12 @@ class UserController extends Controller
                 $user->addMedia($request->avatar)->toMediaCollection('avatar');
             }
 
-            if($user){
+            if ($user) {
                 return redirect('users')->with('success', 'New user created!');
-            }else{
+            } else {
                 return redirect('users')->with('error', 'Failed to create new user! Try again.');
             }
-        }catch (\Exception $e) {
+        } catch (\Exception $e) {
             $bug = $e->getMessage();
             return redirect()->back()->with('error', $bug);
         }
@@ -156,20 +150,19 @@ class UserController extends Controller
 
     public function edit($id)
     {
-        try
-        {
-            $user  = User::with('roles','permissions')->find($id);
+        try {
+            $user = User::with('roles', 'permissions')->find($id);
 
-            if($user){
+            if ($user) {
                 $user_role = $user->roles->first();
-                $roles     = Role::pluck('name','id');
+                $roles = Role::pluck('name', 'id');
 
-                return view('backend.users.user-edit', compact('user','user_role','roles'));
-            }else{
+                return view('backend.users.user-edit', compact('user', 'user_role', 'roles'));
+            } else {
                 return redirect('404');
             }
 
-        }catch (\Exception $e) {
+        } catch (\Exception $e) {
             $bug = $e->getMessage();
             return redirect()->back()->with('error', $bug);
         }
@@ -181,14 +174,14 @@ class UserController extends Controller
 
         // update user info
         $validator = Validator::make($request->all(), [
-            'id'       => 'required',
-            'name'     => 'required | string ',
-            'email'    => 'required | email',
-            'role'     => 'required'
+            'id' => 'required',
+            'name' => 'required | string ',
+            'email' => 'required | email',
+            'role' => 'required'
         ]);
 
         // check validation for password match
-        if(isset($request->password)){
+        if (isset($request->password)) {
             $validator = Validator::make($request->all(), [
                 'password' => 'required | confirmed'
             ]);
@@ -198,7 +191,7 @@ class UserController extends Controller
             return redirect()->back()->withInput()->with('error', $validator->messages()->first());
         }
 
-        try{
+        try {
 
             $user = User::find($request->id);
 
@@ -208,7 +201,7 @@ class UserController extends Controller
             ]);
 
             // update password if user input a new password
-            if(isset($request->password)){
+            if (isset($request->password)) {
                 $update = $user->update([
                     'password' => Hash::make($request->password)
                 ]);
@@ -223,7 +216,7 @@ class UserController extends Controller
             }
 
             return redirect()->back()->with('success', 'User information updated succesfully!');
-        }catch (\Exception $e) {
+        } catch (\Exception $e) {
             $bug = $e->getMessage();
             return redirect()->back()->with('error', $bug);
 
@@ -233,11 +226,11 @@ class UserController extends Controller
 
     public function delete($id)
     {
-        $user   = User::find($id);
-        if($user){
+        $user = User::find($id);
+        if ($user) {
             $user->delete();
             return redirect('users')->with('success', 'User removed!');
-        }else{
+        } else {
             return redirect('users')->with('error', 'User not found');
         }
     }
