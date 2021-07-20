@@ -7,6 +7,7 @@ use App\Http\Controllers\Backend\PermissionController;
 use App\Http\Controllers\Backend\RolesController;
 use App\Http\Controllers\Backend\UserController;
 use App\Http\Controllers\Backend\ProfileController;
+
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
