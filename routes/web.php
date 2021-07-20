@@ -138,7 +138,7 @@ Route::group(['middleware' => 'auth'], function(){
 	/////////////////////////this is all demo with examples
     // permission examples
     Route::get('/permission-example', function () {
-        return view('permission-example');
+        return view('pages.permission-example');
     });
     // API Documentation
     Route::get('/rest-api', function () { return view('api'); });
