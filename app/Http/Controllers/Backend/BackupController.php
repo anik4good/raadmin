@@ -120,6 +120,7 @@ class BackupController extends Controller
 
         $disk = Storage::disk(config('backup.backup.destination.disks')[0]);
 
+
         if ($disk->exists(config('backup.backup.name') . '/' . $file_name)) {
             $disk->delete(config('backup.backup.name') . '/' . $file_name);
         }

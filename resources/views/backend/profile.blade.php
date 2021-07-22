@@ -1,7 +1,15 @@
 @extends('layouts.backend.app')
 @section('title', 'Profile')
 @section('content')
+    <!-- push external head elements to head -->
+    @push('head')
+        <link rel="stylesheet" href="{{ asset('plugins/select2/dist/css/select2.min.css') }}">
 
+        <!--Dropify css-->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Dropify/0.2.2/css/dropify.min.css"
+              integrity="sha512-EZSUkJWTjzDlspOoPSpUFR0o0Xy7jdzW//6qhUkoZ9c4StFkVsp9fbbd0O06p9ELS3H486m4wmrCELjza4JEog=="
+              crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    @endpush
 
     <div class="container-fluid">
         <div class="page-header">
@@ -47,7 +55,7 @@
 
                                 <h4 class="card-title mt-10">{{  $profile->user->name }}</h4>
                                 <span
-                                             class="badge badge-pill badge-primary">{{  $profile->user->get_roles_single() }}</span>
+                                    class="badge badge-pill badge-primary">{{  $profile->user->get_roles_single() }}</span>
                                 {{--                                 <p class="card-subtitle">{{  $profile->occupation }}</p>--}}
                         </div>
                     </div>
@@ -261,42 +269,104 @@
                         <div class="tab-pane fade" id="previous-month" role="tabpanel"
                              aria-labelledby="pills-setting-tab">
                             <div class="card-body">
-                                <form class="form-horizontal">
+                                <form class="form-horizontal" method="POST"
+                                      action="{{route('profile.update')}}" enctype="multipart/form-data">
+                                    @csrf
+
                                     <div class="form-group">
-                                        <label for="example-name">{{ __('Full Name')}}</label>
+                                        <div class="main-card mb-3 card">
+                                            <div class="card-body">
+                                                <input type="file" name="avatar" id="avatar"
+                                                       class="dropify"
+                                                       data-default-file="{{ $profile->user->getFirstMediaUrl('avatar','thumb') ?? '' }}">
+                                            </div>
+                                            <!-- /.card-body -->
+                                        </div>
+                                        <!-- /.card -->
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="name">{{ __('Full Name')}}</label>
                                         <input type="text" value="{{$profile->user->name}}" class="form-control"
                                                name="name" id="name">
                                     </div>
                                     <div class="form-group">
-                                        <label for="example-email">{{ __('Email')}}</label>
+                                        <label for="email">{{ __('Email')}}</label>
                                         <input type="email" value="{{$profile->user->email}}" class="form-control"
                                                name="email" id="email">
                                     </div>
+
                                     <div class="form-group">
-                                        <label for="example-password">{{ __('Password')}}</label>
-                                        <input type="password" value="password" class="form-control"
-                                               name="example-password" id="example-password">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="example-phone">{{ __('Phone No')}}</label>
-                                        <input type="text" placeholder="123 456 7890" id="example-phone"
-                                               name="example-phone" class="form-control">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="example-message">{{ __('Message')}}</label>
-                                        <textarea name="example-message" name="example-message" rows="5"
-                                                  class="form-control"></textarea>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="example-country">{{ __('Select Country')}}</label>
-                                        <select name="example-message" id="example-message" class="form-control">
-                                            <option>{{ __('London')}}</option>
-                                            <option>{{ __('India')}}</option>
-                                            <option>{{ __('Usa')}}</option>
-                                            <option>{{ __('Canada')}}</option>
-                                            <option>{{ __('Thailand')}}</option>
+                                        <label for="Gender">{{ __('Gender')}}</label>
+                                        <select type="select" id="gender" name="gender"
+                                                class="custom-select">
+                                            <option {{$profile->gender=='Male'?'selected':''}} >Male
+                                            </option>
+
+                                            <option {{$profile->gender=='Female'?'selected':''}} >Female
+                                            </option>
                                         </select>
                                     </div>
+
+                                    <div class="form-group">
+                                        <label for="phone">{{ __('Phone No')}}</label>
+                                        <input type="text" id="example-phone"
+                                               name="phone" class="form-control" value="{{$profile->phone}}">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="Occupation">{{ __('Occupation')}}</label>
+                                        <input type="text" id="example-phone"
+                                               name="occupation" class="form-control" value="{{$profile->occupation}}">
+                                    </div>
+
+
+                                    <div class="form-group">
+                                        <label for="address">{{ __('About')}}</label>
+                                        <textarea name="about"  rows="5"
+                                                  class="form-control">{{$profile->about}}</textarea>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="address">{{ __('Address')}}</label>
+                                        <textarea name="address"  rows="5"
+                                                  class="form-control">{{$profile->address}}</textarea>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="City">{{ __('City')}}</label>
+                                        <input type="text" id="example-phone"
+                                               name="city" class="form-control" value="{{$profile->city}}">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="PostCode">{{ __('PostCode')}}</label>
+                                        <input type="text" id="example-phone"
+                                               name="post_code" class="form-control" value="{{$profile->post_code}}">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="country">{{ __('Select Country')}}</label>
+                                        <select type="select" id="country" name="country"
+                                                class="custom-select">
+                                            <option {{$profile->country=='Bangladesh'?'selected':''}} >Bangladesh
+                                            </option>
+                                            <option {{$profile->country=='India'?'selected':''}} >India
+                                            </option>
+                                        </select>
+                                    </div>
+
+
+                                    <div class="form-group">
+                                        <label for="State">{{ __('State')}}</label>
+                                        <input type="text" id="example-phone"
+                                               name="state" class="form-control" value="{{$profile->state}}">
+                                    </div>
+
+
+
+
+
                                     <button class="btn btn-success" type="submit">Update Profile</button>
                                 </form>
                             </div>
@@ -358,6 +428,21 @@
                 </div>
             </div>
         </div>
-
     </div>
+
+    <!-- push external js -->
+    @push('script')
+        <script src="{{ asset('plugins/select2/dist/js/select2.min.js') }}"></script>
+        <!--Dropify script-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Dropify/0.2.2/js/dropify.min.js"
+                integrity="sha512-8QFTrG0oeOiyWo/VM9Y8kgxdlCryqhIxVeRpWSezdRRAvarxVtwLnGroJgnVW9/XBRduxO/z1GblzPrMQoeuew=="
+                crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script>
+            $(document).ready(function () {
+                // Dropify
+                $('.dropify').dropify();
+
+            });
+        </script>
+    @endpush
 @endsection

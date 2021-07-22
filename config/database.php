@@ -45,6 +45,7 @@ return [
 
         'mysql' => [
             'driver' => 'mysql',
+            'dump' => ['dump_binary_path' => 'C:\laragon\bin\mysql\mysql-5.7.33-winx64\bin' ], // your mysql bin location
             'url' => env('DATABASE_URL'),
             'host' => env('DB_HOST', '127.0.0.1'),
             'port' => env('DB_PORT', '3306'),

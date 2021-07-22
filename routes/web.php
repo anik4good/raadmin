@@ -54,11 +54,11 @@ Route::group(['middleware' => 'auth'], function(){
 
     // Demo route
     Route::get('/demo', function () {
-
         return view('backend.demo');
     })->name('demo');
 
-	//only those have manage_user permission will get access
+
+	//User      //only those have manage_user permission will get access
 	Route::group(['middleware' => 'can:manage_user'], function(){
 	Route::get('/users', [UserController::class,'index']);
 	Route::get('/user/get-list', [UserController::class,'getUserList']);
@@ -69,7 +69,18 @@ Route::group(['middleware' => 'auth'], function(){
 		Route::get('/user/delete/{id}', [UserController::class,'delete']);
 	});
 
-	//only those have manage_role permission will get access
+
+    // Profile          //only those have manage_profile Profile will get access
+    Route::group(['middleware' => 'can:manage_profile','as' => 'profile.', 'prefix' => 'profile'], function(){
+        Route::get('profile/', [ProfileController::class, 'index'])->name('index');
+        Route::post('profile/', [ProfileController::class, 'update'])->name('update');
+        Route::post('profile/store', [ProfileController::class, 'store'])->name('store');
+        // Security
+        Route::post('profile/security', [ProfileController::class, 'updatePassword'])->name('password.update');
+    });
+
+
+	//Roles     //only those have manage_role permission will get access
 	Route::group(['middleware' => 'can:manage_role|manage_user'], function(){
 		Route::get('/roles', [RolesController::class,'index']);
 		Route::get('/role/get-list', [RolesController::class,'getRoleList']);
@@ -80,7 +91,7 @@ Route::group(['middleware' => 'auth'], function(){
 	});
 
 
-	//only those have manage_permission permission will get access
+	//Permissions       //only those have manage_permission permission will get access
 	Route::group(['middleware' => 'can:manage_permission|manage_user'], function(){
 		Route::get('/permission', [PermissionController::class,'index']);
 		Route::get('/permission/get-list', [PermissionController::class,'getPermissionList']);
@@ -91,7 +102,7 @@ Route::group(['middleware' => 'auth'], function(){
 
 
 
-    //only those have manage_setting permission will get access
+    //Settings      //only those have manage_setting permission will get access
     Route::group(['middleware' => 'can:manage_setting','as' => 'settings.', 'prefix' => 'settings'], function(){
         Route::get('general', [SettingController::class, 'index'])->name('index');
         Route::patch('general', [SettingController::class, 'update'])->name('update');
@@ -108,26 +119,19 @@ Route::group(['middleware' => 'auth'], function(){
     });
 
 
-    //only those have manage_backup permission will get access
+    // Backups      //only those have manage_backup permission will get access
     Route::group(['middleware' => 'can:manage_backup','as' => 'settings.', 'prefix' => 'settings'], function(){
-        // Backups
-        Route::resource('backups', BackupController::class)->only(['index', 'store', 'destroy']);
-        Route::get('backups/{file_name}', [BackupController::class, 'download'])->name('backups.download');
+        Route::get('backups', [BackupController::class, 'index'])->name('backups.index');
+        Route::post('backups', [BackupController::class, 'store'])->name('backups.store');
+        Route::delete('app/backups/{backup} ', [BackupController::class, 'destroy'])->name('backups.destroy');
+
         Route::delete('backups', [BackupController::class, 'clean'])->name('backups.clean');
+        Route::get('backups/{file_name}', [BackupController::class, 'download'])->name('backups.download');
     });
 
 
 
 
-    //only those have manage_profile Profile will get access
-    Route::group(['middleware' => 'can:manage_profile','as' => 'profile.', 'prefix' => 'profile'], function(){
-		Route::get('profile/', [ProfileController::class, 'index'])->name('index');
-		Route::post('profile/', [ProfileController::class, 'update'])->name('update');
-		Route::post('profile/store', [ProfileController::class, 'store'])->name('store');
-
-        // Security
-        Route::post('profile/security', [ProfileController::class, 'updatePassword'])->name('password.update');
-    });
 
 	// get permissions
 	Route::get('get-role-permissions-badge', [PermissionController::class,'getPermissionBadgeByRole']);
@@ -135,11 +139,12 @@ Route::group(['middleware' => 'auth'], function(){
 
 
 
-	/////////////////////////this is all demo with examples
+	//////////////////////////////////////////////////this is all demo with examples//////////////////////////////////////////////////
     // permission examples
     Route::get('/permission-example', function () {
         return view('pages.permission-example');
     });
+
     // API Documentation
     Route::get('/rest-api', function () { return view('api'); });
     // Editable Datatable
