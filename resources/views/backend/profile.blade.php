@@ -19,7 +19,7 @@
                         <i class="ik ik-file-text bg-blue"></i>
                         <div class="d-inline">
                             <h5>{{ __('Profile')}}</h5>
-                            <span>{{ __('lorem ipsum dolor sit amet, consectetur adipisicing elit')}}</span>
+                            <span>{{ __('User Details Profile')}}</span>
                         </div>
                     </div>
                 </div>
@@ -45,7 +45,7 @@
                         <div class="text-center">
                             @hasrole('SuperAdmin')
                             <img
-                                src="{{ Auth::user()->getFirstMediaUrl('avatar') == null ? Auth::user()->getFirstMediaUrl('avatar') : asset('img/super_admin.jpg') }}"
+                                src="{{ Auth::user()->getFirstMediaUrl('avatar') != null ? Auth::user()->getFirstMediaUrl('avatar') : asset('img/super_admin.jpg') }}"
                                 class="rounded-circle" width="150"/>
                             @else
                                 <img

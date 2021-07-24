@@ -14,7 +14,7 @@
                     </div>
                 </div>
                 <button class="nav-link" title="clear cache">
-                    <a href="{{url('clear-cache')}}">
+                    <a href="{{route('cache.clear.backend')}}">
                         <i class="ik ik-battery-charging"></i>
                     </a>
                 </button> &nbsp;&nbsp;
