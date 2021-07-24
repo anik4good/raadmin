@@ -8,6 +8,7 @@ use App\Http\Controllers\Backend\RolesController;
 use App\Http\Controllers\Backend\UserController;
 use App\Http\Controllers\Backend\ProfileController;
 
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
@@ -25,6 +26,21 @@ use App\Http\Controllers\HomeController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+//for shared hosting
+Route::get('/migrate', function () {
+    Artisan::call('migrate:fresh --seed');
+    notify()->success('All Table Successfully Migrated.', 'Success');
+    return redirect()->back();
+});
+Route::get('/storage-link', function () {
+    Artisan::call('storage:link');
+    notify()->success('Storage Successfully Linked.', 'Success');
+    return redirect()->back();
+});
+
+
+
 Route::get('/', function () { return view('home'); });
 
 
@@ -43,7 +59,7 @@ Route::post('password/reset', [ResetPasswordController::class,'reset'])->name('p
 Route::group(['middleware' => 'auth'], function(){
 	// logout route
 	Route::get('/logout', [LoginController::class,'logout']);
-	Route::get('/clear-cache', [HomeController::class,'clearCache']);
+	Route::get('/cache-clear', [HomeController::class,'clearCache']);
 
 	// dashboard route
 	Route::get('/dashboard', function () {

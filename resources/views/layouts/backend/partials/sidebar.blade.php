@@ -4,7 +4,7 @@
             <div class="logo-img">
                 @if(setting('site_logo') != null)
                     <img
-                        src="{{ Storage::url(setting('site_logo'))  }}"
+                        src="{{ asset('storage/'.setting('site_logo'))  }}"
                         class="header-brand-img" title="TECHNIK" style="height: 37px;max-width: 168px;">
                 @else
 

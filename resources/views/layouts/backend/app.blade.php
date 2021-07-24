@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}" >
 <head>
-	<title>@yield('title','') | Radmin - Laravel Admin Starter</title>
+	<title>@yield('title','') | {{ setting('site_title', 'LaraStarter') }}</title>
 	<!-- initiate head with meta tags, css and script -->
 
 	@include('layouts.backend.partials.head')
@@ -42,6 +42,8 @@
 	@include('layouts.backend.partials.script')
 
     <!-- Stack array for including inline script -->
+
+
     @stack('js')
 </body>
 </html>

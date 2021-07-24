@@ -55,7 +55,7 @@
 
                                 <h4 class="card-title mt-10">{{  $profile->user->name }}</h4>
                                 <span
-                                    class="badge badge-pill badge-primary">{{  $profile->user->get_roles_single() }}</span>
+                                    class="badge badge-pill badge-info" style="padding: 2px 5px">{{  $profile->user->get_roles_single() }}</span>
                                 {{--                                 <p class="card-subtitle">{{  $profile->occupation }}</p>--}}
                         </div>
                     </div>
@@ -272,7 +272,6 @@
                                 <form class="form-horizontal" method="POST"
                                       action="{{route('profile.update')}}" enctype="multipart/form-data">
                                     @csrf
-
                                     <div class="form-group">
                                         <div class="main-card mb-3 card">
                                             <div class="card-body">
@@ -284,89 +283,134 @@
                                         </div>
                                         <!-- /.card -->
                                     </div>
-
                                     <div class="form-group">
                                         <label for="name">{{ __('Full Name')}}</label>
                                         <input type="text" value="{{$profile->user->name}}" class="form-control"
                                                name="name" id="name">
                                     </div>
-                                    <div class="form-group">
-                                        <label for="email">{{ __('Email')}}</label>
-                                        <input type="email" value="{{$profile->user->email}}" class="form-control"
-                                               name="email" id="email">
+
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="email">{{ __('Email')}}</label>
+                                                <input type="email" value="{{$profile->user->email}}" class="form-control"
+                                                       name="email" id="email">
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="Gender">{{ __('Gender')}}</label>
+                                                <select type="select" id="gender" name="gender"
+                                                        class="custom-select">
+                                                    <option {{$profile->gender=='Male'?'selected':''}} >Male
+                                                    </option>
+                                                    <option {{$profile->gender=='Female'?'selected':''}} >Female
+                                                    </option>
+                                                </select>
+                                            </div>
+                                        </div>
                                     </div>
 
-                                    <div class="form-group">
-                                        <label for="Gender">{{ __('Gender')}}</label>
-                                        <select type="select" id="gender" name="gender"
-                                                class="custom-select">
-                                            <option {{$profile->gender=='Male'?'selected':''}} >Male
-                                            </option>
 
-                                            <option {{$profile->gender=='Female'?'selected':''}} >Female
-                                            </option>
-                                        </select>
+
+                                    <div class="row">
+                                        <div class="col-md-6">
+
+                                            <div class="form-group">
+                                                <label for="phone">{{ __('Phone No')}}</label>
+                                                <input type="text" id="example-phone"
+                                                       name="phone" class="form-control" value="{{$profile->phone}}">
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="Occupation">{{ __('Occupation')}}</label>
+                                                <input type="text" id="example-phone"
+                                                       name="occupation" class="form-control" value="{{$profile->occupation}}">
+                                            </div>
+                                        </div>
                                     </div>
 
-                                    <div class="form-group">
-                                        <label for="phone">{{ __('Phone No')}}</label>
-                                        <input type="text" id="example-phone"
-                                               name="phone" class="form-control" value="{{$profile->phone}}">
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label for="Occupation">{{ __('Occupation')}}</label>
-                                        <input type="text" id="example-phone"
-                                               name="occupation" class="form-control" value="{{$profile->occupation}}">
-                                    </div>
 
 
                                     <div class="form-group">
                                         <label for="address">{{ __('About')}}</label>
-                                        <textarea name="about"  rows="5"
+                                        <textarea name="about" rows="5"
                                                   class="form-control">{{$profile->about}}</textarea>
                                     </div>
-
                                     <div class="form-group">
                                         <label for="address">{{ __('Address')}}</label>
-                                        <textarea name="address"  rows="5"
+                                        <textarea name="address" rows="5"
                                                   class="form-control">{{$profile->address}}</textarea>
                                     </div>
-
-                                    <div class="form-group">
-                                        <label for="City">{{ __('City')}}</label>
-                                        <input type="text" id="example-phone"
-                                               name="city" class="form-control" value="{{$profile->city}}">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="City">{{ __('City')}}</label>
+                                                <input type="text" id="example-phone"
+                                                       name="city" class="form-control" value="{{$profile->city}}">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="PostCode">{{ __('PostCode')}}</label>
+                                                <input type="text" id="example-phone"
+                                                       name="post_code" class="form-control"
+                                                       value="{{$profile->post_code}}">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="country">{{ __('Select Country')}}</label>
+                                                <select type="select" id="country" name="country"
+                                                        class="custom-select">
+                                                    <option {{$profile->country=='Bangladesh'?'selected':''}} >
+                                                        Bangladesh
+                                                    </option>
+                                                    <option {{$profile->country=='India'?'selected':''}} >India
+                                                    </option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="State">{{ __('State')}}</label>
+                                                <input type="text" id="example-phone"
+                                                       name="state" class="form-control" value="{{$profile->state}}">
+                                            </div>
+                                        </div>
                                     </div>
 
-                                    <div class="form-group">
-                                        <label for="PostCode">{{ __('PostCode')}}</label>
-                                        <input type="text" id="example-phone"
-                                               name="post_code" class="form-control" value="{{$profile->post_code}}">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="facebook">{{ __('Facebook(only username)')}}</label>
+                                                <input type="text" class="form-control" id="exampleInputEmail3"
+                                                       placeholder=" eg. anik4good" name="facebook" value="{{$profile->facebook}}">
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="facebook">{{ __('Twitter(only username)')}}</label>
+                                                <input type="text" class="form-control" id="exampleInputEmail3"
+                                                       placeholder=" eg. anik4good" name="twitter" value="{{$profile->facebook}}">
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="facebook">{{ __('Instagram(only username)')}}</label>
+                                                <input type="text" class="form-control" id="exampleInputEmail3"
+                                                       placeholder=" eg. anik4good" name="instagram" value="{{$profile->facebook}}">
+                                            </div>
+                                        </div>
+
                                     </div>
-
-                                    <div class="form-group">
-                                        <label for="country">{{ __('Select Country')}}</label>
-                                        <select type="select" id="country" name="country"
-                                                class="custom-select">
-                                            <option {{$profile->country=='Bangladesh'?'selected':''}} >Bangladesh
-                                            </option>
-                                            <option {{$profile->country=='India'?'selected':''}} >India
-                                            </option>
-                                        </select>
-                                    </div>
-
-
-                                    <div class="form-group">
-                                        <label for="State">{{ __('State')}}</label>
-                                        <input type="text" id="example-phone"
-                                               name="state" class="form-control" value="{{$profile->state}}">
-                                    </div>
-
-
-
-
-
                                     <button class="btn btn-success" type="submit">Update Profile</button>
                                 </form>
                             </div>

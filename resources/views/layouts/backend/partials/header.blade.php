@@ -21,7 +21,11 @@
                 <button type="button" id="navbar-fullscreen" class="nav-link"><i class="ik ik-maximize"></i></button>
             </div>
             <div class="top-menu d-flex align-items-center">
-                <p>{{Auth::user()->name}}</p>
+                <span class="text-sm-center">{{Auth::user()->name}}
+                 <span
+                     class="badge badge-pill badge-info" style="padding: 2px 5px">{{  Auth::user()->get_roles_single() }}</span>
+                </span>
+
                 {{--                <div class="dropdown">--}}
 {{--                    <a class="nav-link dropdown-toggle" href="#" id="notiDropdown" role="button" data-toggle="dropdown"--}}
 {{--                       aria-haspopup="true" aria-expanded="false"><i class="ik ik-bell"></i><span--}}
@@ -109,8 +113,9 @@
                              src="{{ Auth::user()->getFirstMediaUrl('avatar') != null ? Auth::user()->getFirstMediaUrl('avatar') : config('app.placeholder').'160' }}"
                         ></a>
                         @endhasrole
-                     <span
-                                class="badge badge-pill badge-info">{{  Auth::user()->get_roles_single() }}</span>
+
+
+
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
                         <a class="dropdown-item" href="{{route('profile.index')}}"><i
                                 class="ik ik-user dropdown-icon"></i> {{ __('Profile')}}</a>

@@ -64,7 +64,7 @@
                                     <label for="site_logo">Logo (Only Image are allowed) <code>{ key: site_logo }</code></label>
                                     <input type="file" name="site_logo" id="site_logo"
                                            class="dropify @error('site_logo') is-invalid @enderror"
-                                           data-default-file="{{ setting('site_logo') != null ?  Storage::url(setting('site_logo')) : '' }}">
+                                           data-default-file="{{ setting('site_logo') != null ?  asset('storage/'.setting('site_logo')) : '' }}">
                                     @error('site_logo')
                                     <span class="text-danger" role="alert">
                                      <strong>{{ $message }}</strong>
@@ -76,7 +76,7 @@
                                     <label for="site_favicon">Favicon (Only Image are allowed, Size: 33 X 33) <code>{ key: site_favicon }</code></label>
                                     <input type="file" name="site_favicon" id="site_favicon"
                                            class="dropify @error('site_favicon') is-invalid @enderror"
-                                           data-default-file="{{ setting('site_favicon') != null ?  Storage::url(setting('site_favicon')) : '' }}">
+                                           data-default-file="{{ setting('site_favicon') != null ?  asset('storage/'.setting('site_favicon')) : '' }}">
                                     @error('site_favicon')
                                     <span class="text-danger" role="alert">
                                      <strong>{{ $message }}</strong>
