@@ -55,7 +55,8 @@
 
                                 <h4 class="card-title mt-10">{{  $profile->user->name }}</h4>
                                 <span
-                                    class="badge badge-pill badge-info" style="padding: 2px 5px">{{  $profile->user->get_roles_single() }}</span>
+                                    class="badge badge-pill badge-info"
+                                    style="padding: 2px 5px">{{  $profile->user->get_roles_single() }}</span>
                                 {{--                                 <p class="card-subtitle">{{  $profile->occupation }}</p>--}}
                         </div>
                     </div>
@@ -288,16 +289,15 @@
                                         <input type="text" value="{{$profile->user->name}}" class="form-control"
                                                name="name" id="name">
                                     </div>
-
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="email">{{ __('Email')}}</label>
-                                                <input type="email" value="{{$profile->user->email}}" class="form-control"
+                                                <input type="email" value="{{$profile->user->email}}"
+                                                       class="form-control"
                                                        name="email" id="email">
                                             </div>
                                         </div>
-
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="Gender">{{ __('Gender')}}</label>
@@ -311,30 +311,23 @@
                                             </div>
                                         </div>
                                     </div>
-
-
-
                                     <div class="row">
                                         <div class="col-md-6">
-
                                             <div class="form-group">
                                                 <label for="phone">{{ __('Phone No')}}</label>
                                                 <input type="text" id="example-phone"
                                                        name="phone" class="form-control" value="{{$profile->phone}}">
                                             </div>
                                         </div>
-
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="Occupation">{{ __('Occupation')}}</label>
                                                 <input type="text" id="example-phone"
-                                                       name="occupation" class="form-control" value="{{$profile->occupation}}">
+                                                       name="occupation" class="form-control"
+                                                       value="{{$profile->occupation}}">
                                             </div>
                                         </div>
                                     </div>
-
-
-
                                     <div class="form-group">
                                         <label for="address">{{ __('About')}}</label>
                                         <textarea name="about" rows="5"
@@ -384,32 +377,31 @@
                                             </div>
                                         </div>
                                     </div>
-
                                     <div class="row">
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="facebook">{{ __('Facebook(only username)')}}</label>
                                                 <input type="text" class="form-control" id="exampleInputEmail3"
-                                                       placeholder=" eg. anik4good" name="facebook" value="{{$profile->facebook}}">
+                                                       placeholder=" eg. anik4good" name="facebook"
+                                                       value="{{$profile->facebook}}">
                                             </div>
                                         </div>
-
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="facebook">{{ __('Twitter(only username)')}}</label>
                                                 <input type="text" class="form-control" id="exampleInputEmail3"
-                                                       placeholder=" eg. anik4good" name="twitter" value="{{$profile->facebook}}">
+                                                       placeholder=" eg. anik4good" name="twitter"
+                                                       value="{{$profile->facebook}}">
                                             </div>
                                         </div>
-
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="facebook">{{ __('Instagram(only username)')}}</label>
                                                 <input type="text" class="form-control" id="exampleInputEmail3"
-                                                       placeholder=" eg. anik4good" name="instagram" value="{{$profile->facebook}}">
+                                                       placeholder=" eg. anik4good" name="instagram"
+                                                       value="{{$profile->facebook}}">
                                             </div>
                                         </div>
-
                                     </div>
                                     <button class="btn btn-success" type="submit">Update Profile</button>
                                 </form>

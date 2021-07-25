@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
-use Illuminate\Support\Facades\Gate;
+
 use Illuminate\Support\Facades\Storage;
 
 class BackupController extends Controller
@@ -14,8 +14,6 @@ class BackupController extends Controller
 
     public function index()
     {
-
-
         $disk = Storage::disk(config('backup.backup.destination.disks')[0]);
 
         $files = $disk->files(config('backup.backup.name'));
@@ -38,7 +36,7 @@ class BackupController extends Controller
 
         // reverse the backups, so the newest one would be on top
         $backups = array_reverse($backups);
-        return view('backend.backups',compact('backups'));
+        return view('backend.backups', compact('backups'));
     }
 
 
@@ -62,39 +60,39 @@ class BackupController extends Controller
 
     public function store(Request $request)
     {
-
         // start the backup process
         Artisan::call('backup:run');
 
         notify()->success('Backup Created Successfully.', 'Added');
         return back();
-
     }
 
 
     public function download($file_name)
     {
-
-
         $file = config('backup.backup.name') . '/' . $file_name;
         $disk = Storage::disk(config('backup.backup.destination.disks')[0]);
         if ($disk->exists($file)) {
             $fs = Storage::disk(config('backup.backup.destination.disks')[0])->getDriver();
             $stream = $fs->readStream($file);
-            return \Response::stream(function () use ($stream) {
-                fpassthru($stream);
-            }, 200, [
-                "Content-Type" => $fs->getMimetype($file),
-                "Content-Length" => $fs->getSize($file),
-                "Content-disposition" => "attachment; filename=\"" . basename($file) . "\"",
-            ]);
+            return \Response::stream(
+                function () use ($stream) {
+                    fpassthru($stream);
+                },
+                200,
+                [
+                    "Content-Type" => $fs->getMimetype($file),
+                    "Content-Length" => $fs->getSize($file),
+                    "Content-disposition" => "attachment; filename=\"" . basename($file) . "\"",
+                ]
+            );
         }
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -117,13 +115,13 @@ class BackupController extends Controller
 
     public function destroy($file_name)
     {
-
         $disk = Storage::disk(config('backup.backup.destination.disks')[0]);
 
-
-        if ($disk->exists(config('backup.backup.name') . '/' . $file_name)) {
+        if ($disk->exists(config('backup.backup.name') . '/' . $file_name))
+        {
             $disk->delete(config('backup.backup.name') . '/' . $file_name);
         }
+
         notify()->success('Backup Successfully Deleted.', 'Deleted');
         return back();
     }
@@ -131,8 +129,7 @@ class BackupController extends Controller
 
     public function clean()
     {
-
-        // start the backup process
+        // clean the backup process
         Artisan::call('backup:clean');
 
         notify()->success('All Old Backups Successfully Deleted.', 'Added');

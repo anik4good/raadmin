@@ -8,11 +8,11 @@ use App\Http\Requests\Settings\UpdateAppearanceRequest;
 use App\Http\Requests\Settings\UpdateMailSettingsRequest;
 use App\Http\Requests\Settings\UpdateSocialiteSettingsRequest;
 use App\Setting;
-use Illuminate\Http\Request;
+
 use Illuminate\Support\Facades\Artisan;
-use Illuminate\Support\Facades\Redirect;
+
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Str;
+
 use Inertia\Inertia;
 
 class SettingController extends Controller
@@ -20,7 +20,7 @@ class SettingController extends Controller
 
     public function index()
     {
-     //   return  config('settings.site_logo');
+        //   return  config('settings.site_logo');
         return view('backend.settings.general');
     }
 
@@ -29,10 +29,9 @@ class SettingController extends Controller
     {
         Setting::updateSettings($request->validated());
 
-
-        $site_title = str_replace(' ','',$request->site_title);
+        $site_title = str_replace(' ', '', $request->site_title);
         // Update .env file
-        Artisan::call("env:set APP_NAME='". $site_title ."'");
+        Artisan::call("env:set APP_NAME='" . $site_title . "'");
         notify()->success('Settings Successfully Updated.', 'Success');
         return back();
     }
@@ -46,14 +45,18 @@ class SettingController extends Controller
 
     public function updateAppearance(UpdateAppearanceRequest $request)
     {
-        if ($request->hasFile('site_logo')) {
+        if ($request->hasFile('site_logo'))
+        {
             $this->deleteOldLogo(config('settings.site_logo'));
             Setting::set('site_logo', Storage::disk('public')->putFile('logos', $request->file('site_logo')));
         }
-        if ($request->hasFile('site_favicon')) {
+
+        if ($request->hasFile('site_favicon'))
+        {
             $this->deleteOldLogo(config('settings.site_favicon'));
             Setting::set('site_favicon', Storage::disk('public')->putFile('logos', $request->file('site_favicon')));
         }
+
         notify()->success('Settings Successfully Updated.', 'Success');
         return back();
     }
@@ -83,6 +86,7 @@ class SettingController extends Controller
         Artisan::call("env:set MAIL_ENCRYPTION='" . $request->mail_encryption . "'");
         Artisan::call("env:set MAIL_FROM_ADDRESS='" . $request->mail_from_address . "'");
         Artisan::call("env:set MAIL_FROM_NAME='" . $request->mail_from_name . "'");
+
         notify()->success('Settings Successfully Updated.', 'Success');
         return back();
     }
@@ -112,11 +116,12 @@ class SettingController extends Controller
     }
 
 
-    public function clear_cache()
+    public function clearCache()
     {
         Artisan::call('cache:clear');
         Artisan::call('route:clear');
         Artisan::call('config:clear');
+
         notify()->success('All cache Successfully Cleared.', 'Success');
         return redirect()->back();
     }

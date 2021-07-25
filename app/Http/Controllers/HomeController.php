@@ -11,17 +11,15 @@ class HomeController extends Controller
 
     public function index()
     {
-
         return view('home');
     }
 
-    public function clearCache()
+    public function clearache()
     {
-
-            Artisan::call('cache:clear');
-            Artisan::call('route:clear');
-            Artisan::call('config:clear');
-            notify()->success('All cache Successfully Cleared.', 'Success');
-            return redirect()->back();
+        Artisan::call('cache:clear');
+        Artisan::call('route:clear');
+        Artisan::call('config:clear');
+        notify()->success('All cache Successfully Cleared.', 'Success');
+        return redirect()->back();
     }
 }
