@@ -14,7 +14,7 @@ class HomeController extends Controller
         return view('home');
     }
 
-    public function clearache()
+    public function clearCache()
     {
         Artisan::call('cache:clear');
         Artisan::call('route:clear');

@@ -27,7 +27,7 @@
                 </div>
                 <div
                     class="nav-item {{ ($segment1 == 'users' || $segment1 == 'roles'||$segment1 == 'permission' ||$segment1 == 'settings'||$segment1 == 'backups'||$segment1 == 'profile'||$segment1 == 'user') ? 'active open' : '' }} has-sub">
-                    <a href="#"><i class="ik ik-user"></i><span>{{ __('Adminstrator')}}</span></a>
+                    <a href="#"><i class="ik ik-user"></i><span>{{ __('Administrator')}}</span></a>
                     <div class="submenu-content">
                     @can('manage_user')
                         <!-- only those have manage_user permission will get access -->
@@ -56,7 +56,7 @@
 
                     <!-- only those have manage_setting permission will get access -->
                         @can('manage_setting')
-                            <a href="{{route('settings.appearance.index')}}"
+                            <a href="{{route('settings.index')}}"
                                class="menu-item {{ ($segment1 == 'settings') ? 'active' : '' }}">{{ __('Setting')}}</a>
                         @endcan
 

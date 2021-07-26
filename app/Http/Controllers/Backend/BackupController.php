@@ -7,7 +7,10 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
 
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Str;
 
 class BackupController extends Controller
 {
@@ -117,12 +120,24 @@ class BackupController extends Controller
     {
         $disk = Storage::disk(config('backup.backup.destination.disks')[0]);
 
-        if ($disk->exists(config('backup.backup.name') . '/' . $file_name))
-        {
-            $disk->delete(config('backup.backup.name') . '/' . $file_name);
+        $file = config('backup.backup.name') . '/' . $file_name;
+        $files = 'TECHNIK' . '/' . $file_name;
+        $files2 = 'TECHNIK/2021-07-25-16-36-43.zip';
+
+
+        // return gettype($files2);
+        Log::debug($files);
+        Log::debug($files2);
+
+        if ($disk->exists($file)) {
+           // Storage::delete($files2);
+              $disk->delete($file);
+            notify()->success('Backup Successfully Deleted.', 'Deleted');
+        } else {
+            notify()->success('Backup Not Deleted.', 'Deleted');
         }
 
-        notify()->success('Backup Successfully Deleted.', 'Deleted');
+
         return back();
     }
 
