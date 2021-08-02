@@ -1,13 +1,13 @@
-@extends('layouts.main') 
+@extends('layouts.main')
 @section('title', 'Widget Statistic')
 @section('content')
     <!-- push external head elements to head -->
     @push('head')
 
-        <link rel="stylesheet" href="{{ asset('plugins/weather-icons/css/weather-icons.min.css') }}">
-        <link rel="stylesheet" href="{{ asset('plugins/owl.carousel/dist/assets/owl.carousel.min.css') }}">
-        <link rel="stylesheet" href="{{ asset('plugins/owl.carousel/dist/assets/owl.theme.default.min.css') }}">
-        <link rel="stylesheet" href="{{ asset('plugins/chartist/dist/chartist.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('assets/backend/plugins/weather-icons/css/weather-icons.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('assets/backend/plugins/owl.carousel/dist/assets/owl.carousel.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('assets/backend/plugins/owl.carousel/dist/assets/owl.theme.default.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('assets/backend/plugins/chartist/dist/chartist.min.css') }}">
     @endpush
 
 
@@ -814,16 +814,15 @@
             </div>
         </div>
     </div>
-     
-        
-        
-        
+
+
+
+
     <!-- push external js -->
     @push('script')
-        <script src="{{ asset('plugins/owl.carousel/dist/owl.carousel.min.js') }}"></script>
-        <script src="{{ asset('plugins/chartist/dist/chartist.min.js') }}"></script>
-        
-        <script src="{{ asset('js/widget-statistic.js') }}"></script>
+        <script src="{{ asset('assets/backend/plugins/owl.carousel/dist/owl.carousel.min.js') }}"></script>
+        <script src="{{ asset('assets/backend/plugins/chartist/dist/chartist.min.js') }}"></script>
+
+        <script src="{{ asset('assets/backend/js/widget-statistic.js') }}"></script>
     @endpush
 @endsection
-  

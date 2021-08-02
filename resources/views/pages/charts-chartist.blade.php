@@ -3,7 +3,7 @@
 @section('content')
     <!-- push external head elements to head -->
     @push('head')
-        <link rel="stylesheet" href="{{ asset('plugins/chartist/dist/chartist.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('assets/backend/plugins/chartist/dist/chartist.min.css') }}">
     @endpush
     <div class="container-fluid">
         <div class="page-header">
@@ -132,8 +132,8 @@
     <!-- push external js -->
     @push('script')
 
-        <script src="{{ asset('plugins/chartist/dist/chartist.min.js') }}"></script>
-        <script src="{{ asset('js/chart-chartist.js') }}"></script>
+        <script src="{{ asset('assets/backend/plugins/chartist/dist/chartist.min.js') }}"></script>
+        <script src="{{ asset('assets/backend/js/chart-chartist.js') }}"></script>
     @endpush
 @endsection
 

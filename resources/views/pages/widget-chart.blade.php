@@ -1,12 +1,12 @@
-@extends('layouts.main') 
+@extends('layouts.main')
 @section('title', 'Widget Chart')
 @section('content')
     <!-- push external head elements to head -->
     @push('head')
-        <link rel="stylesheet" href="{{ asset('plugins/weather-icons/css/weather-icons.min.css') }}">
-        <link rel="stylesheet" href="{{ asset('plugins/owl.carousel/dist/assets/owl.carousel.min.css') }}">
-        <link rel="stylesheet" href="{{ asset('plugins/owl.carousel/dist/assets/owl.theme.default.min.css') }}">
-        <link rel="stylesheet" href="{{ asset('plugins/chartist/dist/chartist.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('assets/backend/plugins/weather-icons/css/weather-icons.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('assets/backend/plugins/owl.carousel/dist/assets/owl.carousel.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('assets/backend/plugins/owl.carousel/dist/assets/owl.theme.default.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('assets/backend/plugins/chartist/dist/chartist.min.css') }}">
     @endpush
 
     <div class="container-fluid">
@@ -468,28 +468,30 @@
         </div>
 
     </div>
-            
-        
-        
+
+
+
     <!-- push external js -->
-    @push('script')   
+    @push('script')
 
-        <script src="{{ asset('plugins/owl.carousel/dist/owl.carousel.min.js') }}"></script>
-        <script src="{{ asset('plugins/chartist/dist/chartist.min.js') }}"></script>
-        <script src="{{ asset('plugins/flot-charts/jquery.flot.js') }}"></script>
-        <script src="{{ asset('plugins/flot-charts/jquery.flot.categories.js') }}"></script>
-        <script src="{{ asset('plugins/flot-charts/curvedLines.js') }}"></script>
-        <script src="{{ asset('plugins/flot-charts/jquery.flot.tooltip.min.js') }}"></script>
-        <script src="{{ asset('plugins/jquery-knob/dist/jquery.knob.min.js') }}"></script>
-        <script src="{{ asset('plugins/amcharts/amcharts.js') }}"></script>
-        <script src="{{ asset('plugins/amcharts/gauge.js') }}"></script>
-        <script src="{{ asset('plugins/amcharts/serial.js') }}"></script>
-        <script src="{{ asset('plugins/amcharts/themes/light.js') }}"></script>
-        <script src="{{ asset('plugins/amcharts/pie.js') }}"></script>
-        <script src="{{ asset('plugins/ammap3/ammap/ammap.js') }}"></script>
-        <script src="{{ asset('plugins/ammap3/ammap/maps/js/usaLow.js') }}"></script>
+        <script src="{{ asset('assets/backend/plugins/owl.carousel/dist/owl.carousel.min.js') }}"></script>
+        <script src="{{ asset('assets/backend/plugins/chartist/dist/chartist.min.js') }}"></script>
 
 
-        <script src="{{ asset('js/widget-chart.js') }}"></script>
+        <script src="{{ asset('assets/backend/plugins/flot-charts/jquery.flot.js') }}"></script>
+        <script src="{{ asset('assets/backend/plugins/flot-charts/jquery.flot.categories.js') }}"></script>
+        <script src="{{ asset('assets/backend/plugins/flot-charts/curvedLines.js') }}"></script>
+        <script src="{{ asset('assets/backend/plugins/flot-charts/jquery.flot.tooltip.min.js') }}"></script>
+        <script src="{{ asset('assets/backend/plugins/jquery-knob/dist/jquery.knob.min.js') }}"></script>
+        <script src="{{ asset('assets/backend/plugins/amcharts/amcharts.js') }}"></script>
+        <script src="{{ asset('assets/backend/plugins/amcharts/gauge.js') }}"></script>
+        <script src="{{ asset('assets/backend/plugins/amcharts/serial.js') }}"></script>
+        <script src="{{ asset('assets/backend/plugins/amcharts/themes/light.js') }}"></script>
+        <script src="{{ asset('assets/backend/plugins/amcharts/pie.js') }}"></script>
+        <script src="{{ asset('assets/backend/plugins/ammap3/ammap/ammap.js') }}"></script>
+        <script src="{{ asset('assets/backend/plugins/ammap3/ammap/maps/js/usaLow.js') }}"></script>
+
+
+        <script src="{{ asset('assets/backend/js/widget-chart.js') }}"></script>
     @endpush
 @endsection

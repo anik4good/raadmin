@@ -1,13 +1,13 @@
-@extends('layouts.backend.app') 
+@extends('layouts.backend.app')
 @section('title', 'Permission')
 @section('content')
     <!-- push external head elements to head -->
     @push('head')
-        <link rel="stylesheet" href="{{ asset('plugins/DataTables/datatables.min.css') }}">
-        <link rel="stylesheet" href="{{ asset('plugins/select2/dist/css/select2.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('assets/backend/plugins/DataTables/datatables.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('assets/backend/plugins/select2/dist/css/select2.min.css') }}">
     @endpush
 
-    
+
     <div class="container-fluid">
     	<div class="page-header">
             <div class="row align-items-end">
@@ -93,10 +93,10 @@
     </div>
     <!-- push external js -->
     @push('script')
-    <script src="{{ asset('plugins/select2/dist/js/select2.min.js') }}"></script>
-    <script src="{{ asset('plugins/DataTables/datatables.min.js') }}"></script>
-    <script src="{{ asset('plugins/DataTables/Cell-edit/dataTables.cellEdit.js') }}"></script>
-    <!--server side permission table script-->
-    <script src="{{ asset('js/permission.js') }}"></script>
+        <script src="{{ asset('assets/backend/plugins/DataTables/datatables.min.js') }}"></script>
+        <script src="{{ asset('assets/backend/plugins/select2/dist/js/select2.min.js') }}"></script>
+        <script src="{{ asset('assets/backend/plugins/DataTables/Cell-edit/dataTables.cellEdit.js') }}"></script>
+        <!--server side permission table script-->
+        <script src="{{ asset('assets/backend/js/permission.js') }}"></script>
     @endpush
 @endsection

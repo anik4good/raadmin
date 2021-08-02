@@ -3,7 +3,7 @@
 @section('content')
     <!-- push external head elements to head -->
     @push('head')
-        <link rel="stylesheet" href="{{ asset('plugins/select2/dist/css/select2.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('asset/backend/plugins/select2/dist/css/select2.min.css') }}">
 
         <!--Dropify css-->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Dropify/0.2.2/css/dropify.min.css"
@@ -56,7 +56,7 @@
                                 <h4 class="card-title mt-10">{{  $profile->user->name }}</h4>
                                 <span
                                     class="badge badge-pill badge-info"
-                                    style="padding: 2px 5px">{{  $profile->user->get_roles_single() }}</span>
+                                    style="padding: 2px 5px">{{  $profile->user->role() }}</span>
                                 {{--                                 <p class="card-subtitle">{{  $profile->occupation }}</p>--}}
                         </div>
                     </div>

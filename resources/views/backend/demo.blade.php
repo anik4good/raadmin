@@ -30,6 +30,36 @@
                             </li>
                         </ol>
                     </nav>
+
+                    <div class="page-title-actions">
+                        <div class="d-inline-block">
+                            <button onclick="event.preventDefault();
+                          document.getElementById('clean-old-backups').submit();"
+                                    class="btn btn-danger" type="button">
+                        <span class="btn-icon-wrapper pr-2 opacity-7">
+                            <i class="fas fa-trash fa-w-20"></i>
+                        </span>
+                                {{ __('Clean Old Backups') }}
+                            </button>
+                            <form id="clean-old-backups" action="{{ route('settings.backups.clean') }}" method="POST"
+                                  style="display: none;">
+                                @csrf
+                                @method('DELETE')
+                            </form>
+                            <button onclick="event.preventDefault();
+                          document.getElementById('new-backup-form').submit();"
+                                    class="btn-shadow btn btn-info">
+                        <span class="btn-icon-wrapper pr-2 opacity-7">
+                            <i class="fas fa-plus-circle fa-w-20"></i>
+                        </span>
+                                {{ __('Create New Backup') }}
+                            </button>
+                            <form id="new-backup-form" action="{{ route('settings.backups.store') }}" method="POST"
+                                  style="display: none;">
+                                @csrf
+                            </form>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

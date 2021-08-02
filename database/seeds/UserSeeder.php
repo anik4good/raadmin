@@ -3,7 +3,9 @@
 namespace Database\Seeders;
 
 use App\Setting;
+use App\User;
 use Carbon\Carbon;
+use Faker\Factory;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -18,10 +20,14 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
+
+        // Reset cached roles and permissions
+        app()[ \Spatie\Permission\PermissionRegistrar::class ]->forgetCachedPermissions();
+        $faker = Factory::create();
+
+
         $model_has_roles = [
             ['role_id' => 1, 'model_type' => 'App\User', 'model_id' => 1],
-            ['role_id' => 2, 'model_type' => 'App\User', 'model_id' => 4],
-            ['role_id' => 3, 'model_type' => 'App\User', 'model_id' => 2],
 
         ];
 
@@ -138,6 +144,17 @@ class UserSeeder extends Seeder
         DB::table('profiles')->insert($profiles);
         DB::table('role_has_permissions')->insert($role_has_permissions);
         DB::table('settings')->insert($settings);
+
+
+        $users = User::where('id', '!=', 1)->get();
+
+        foreach ( $users as $user )
+
+        {
+            $user->assignRole('User');
+
+
+        }
 
 
     }

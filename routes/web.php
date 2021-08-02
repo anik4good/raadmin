@@ -7,6 +7,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\ResetPasswordController;
+    use App\Http\Controllers\FrontendController;
 
 //for shared hosting
 Route::get(
@@ -38,12 +39,11 @@ Route::get(
 );
 
 
-Route::get(
-    '/',
-    function () {
-        return view('home');
-    }
-);
+//frontend routes
+    Route::group(['as' => 'frontend.'], function () {
+        Route::get('/', [FrontendController::class, 'index'])->name('home');
+
+    });
 
 
 Route::get('login', [LoginController::class, 'showLoginForm'])->name('login');

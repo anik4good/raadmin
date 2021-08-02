@@ -3,7 +3,7 @@
 @section('content')
     <!-- push external head elements to head -->
     @push('head')
-        <link rel="stylesheet" href="{{ asset('plugins/DataTables/datatables.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('assets/backend/plugins/DataTables/datatables.min.css') }}">
     @endpush
 
 
@@ -105,9 +105,9 @@
 
     <!-- push external js -->
     @push('script')
-    <script src="{{ asset('plugins/DataTables/datatables.min.js') }}"></script>
-    <script src="{{ asset('plugins/select2/dist/js/select2.min.js') }}"></script>
-    <!--server side roles table script-->
-    <script src="{{ asset('js/custom.js') }}"></script>
+        <script src="{{ asset('assets/backend/plugins/DataTables/datatables.min.js') }}"></script>
+        <script src="{{ asset('assets/backend/plugins/select2/dist/js/select2.min.js') }}"></script>
+    <!--server side users table script-->
+    <script src="{{ asset('assets/backend/js/custom.js') }}"></script>
 	@endpush
 @endsection

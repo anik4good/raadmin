@@ -7,20 +7,20 @@
         <meta name="description" content="">
         <meta name="keywords" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        
+
         <link rel="icon" href="{{ asset('favicon.png')}}" type="image/x-icon" />
 
         <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:300,400,600,700,800" rel="stylesheet">
-        
-        <link rel="stylesheet" href="{{ asset('plugins/bootstrap/dist/css/bootstrap.min.css')}}">
-        <link rel="stylesheet" href="{{ asset('plugins/fontawesome-free/css/all.min.css')}}">
-        <link rel="stylesheet" href="{{ asset('plugins/ionicons/dist/css/ionicons.min.css')}}">
-        <link rel="stylesheet" href="{{ asset('plugins/icon-kit/dist/css/iconkit.min.css')}}">
-        <link rel="stylesheet" href="{{ asset('plugins/perfect-scrollbar/css/perfect-scrollbar.css')}}">
-        <link rel="stylesheet" href="{{ asset('dist/css/theme.min.css')}}">
-        <link rel="stylesheet" href="{{ asset('dist/css/style.css')}}">
-        <link rel="stylesheet" href="{{ asset('dist/css/theme-image.css')}}">
-        <script src="{{ asset('src/js/vendor/modernizr-2.8.3.min.js')}}"></script>
+
+        <link rel="stylesheet" href="{{ asset('assets/backend/plugins/bootstrap/dist/css/bootstrap.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('assets/backend/plugins/fontawesome-free/css/all.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('assets/backend/plugins/ionicons/dist/css/ionicons.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('assets/backend/plugins/icon-kit/dist/css/iconkit.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('assets/backend/plugins/perfect-scrollbar/css/perfect-scrollbar.css') }}">
+        <link rel="stylesheet" href="{{ asset('assets/backend/dist/css/theme.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+        <link rel="stylesheet" href="{{ asset('assets/backend/dist/css/theme-image.css')}}">
+        <script src="{{ asset('src/js/vendor/modernizr-2.8.3.min.js') }}"></script>
     </head>
 
     <body>
@@ -85,13 +85,13 @@
                 </div>
             </div>
         </div>
-        
-        <script src="{{ asset('src/js/vendor/jquery-3.3.1.min.js')}}"></script>
-        <script src="{{ asset('plugins/popper.js')}}/dist/umd/popper.min.js')}}"></script>
-        <script src="{{ asset('plugins/bootstrap/dist/js/bootstrap.min.js')}}"></script>
-        <script src="{{ asset('plugins/perfect-scrollbar/dist/perfect-scrollbar.min.js')}}"></script>
-        <script src="{{ asset('plugins/screenfull/dist/screenfull.js')}}"></script>
+
+        <script src="{{ asset('src/js/vendor/jquery-3.3.1.min.js') }}"></script>
+        <script src="{{ asset('assets/backend/plugins/popper.js/dist/umd/popper.min.js') }}"></script>
+        <script src="{{ asset('assets/backend/plugins/bootstrap/dist/js/bootstrap.min.js') }}"></script>
+        <script src="{{ asset('assets/backend/plugins/perfect-scrollbar/dist/perfect-scrollbar.min.js') }}"></script>
+        <script src="{{ asset('assets/backend/plugins/screenfull/dist/screenfull.js') }}"></script>
     </body>
 </html>
 
-               
+

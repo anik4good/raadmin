@@ -1,10 +1,10 @@
-@extends('layouts.main') 
+@extends('layouts.main')
 @section('title', 'Table Bootstrap')
 @section('content')
     <!-- push external head elements to head -->
     @push('head')
 
-        <link rel="stylesheet" href="{{ asset('plugins/datatables.net-bs4/css/dataTables.bootstrap4.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('assets/backend/plugins/DataTables/DataTables-1.10.20/css/dataTables.bootstrap4.min.css') }}">
     @endpush
 
     <div class="container-fluid">
@@ -315,15 +315,14 @@
             </div>
         </div>
     </div>
-      
-    
+
+
     <!-- push external js -->
-    @push('script')  
+    @push('script')
 
-        <script src="{{ asset('plugins/datatables.net/js/jquery.dataTables.min.js') }}"></script>
-        <script src="{{ asset('plugins/datatables.net-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
+        <script src="{{ asset('assets/backend/plugins/DataTables/DataTables-1.10.20/js/jquery.dataTables.min.js') }}"></script>
+        <script src="{{ asset('assets/backend/plugins/DataTables/DataTables-1.10.20/js/dataTables.bootstrap4.min.js') }}"></script>
 
-        <script src="{{ asset('js/tables.js') }}"></script>
+        <script src="{{ asset('assets/backend/js/tables.js') }}"></script>
     @endpush
 @endsection
-   

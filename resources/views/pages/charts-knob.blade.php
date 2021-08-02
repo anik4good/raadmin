@@ -1,4 +1,4 @@
-@extends('layouts.main') 
+@extends('layouts.main')
 @section('title', 'Knob Chart')
 @section('content')
     <div class="container-fluid">
@@ -98,7 +98,7 @@
     <!-- push external js -->
     @push('script')
 
-        <script src="{{ asset('plugins/jquery-knob/dist/jquery.knob.min.js') }}"></script>
-        <script src="{{ asset('js/chart-knob.js') }}"></script>
+        <script src="{{ asset('assets/backend/plugins/jquery-knob/dist/jquery.knob.min.js') }}"></script>
+        <script src="{{ asset('assets/backend/js/chart-knob.js') }}"></script>
     @endpush
 @endsection

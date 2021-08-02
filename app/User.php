@@ -54,7 +54,7 @@ class User extends Authenticatable implements HasMedia
     }
 
 
-    public function get_roles_single(){
+    public function role(){
          $roles =$this->getRoleNames()->toArray();
         $role = '';
         if($roles){

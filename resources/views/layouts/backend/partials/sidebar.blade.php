@@ -67,6 +67,13 @@
                         @endcan
                     </div>
                 </div>
+
+
+
+
+                <!-- ******************************************************************************************************************************** -->
+
+            @can('manage_setting')
                 <!-- ************** Demo Layouts url ************** -->
                 <div class="nav-lavel">{{ __('Documentation')}} </div>
                 <div class="nav-item {{ ($segment1 == 'rest-api') ? 'active' : '' }}">
@@ -231,6 +238,7 @@
                             class="ik ik-slash"></i><span>{{ __('Disabled Menu')}}</span></a>
                 </div>
             </nav>
+            @endcan
         </div>
     </div>
 </div>

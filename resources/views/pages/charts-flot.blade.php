@@ -1,4 +1,4 @@
-@extends('layouts.main') 
+@extends('layouts.main')
 @section('title', 'Flot Chart')
 @section('content')
     <div class="container-fluid">
@@ -107,11 +107,11 @@
 
     <!-- push external js -->
     @push('script')
-        <script src="{{ asset('plugins/flot-charts/jquery.flot.js') }}"></script>
-        <script src="{{ asset('plugins/flot-charts/jquery.flot.categories.js') }}"></script>
-        <script src="{{ asset('plugins/flot-charts/jquery.flot.pie.js') }}"></script>
-        <script src="{{ asset('plugins/flot-charts/curvedLines.js') }}"></script>
-        <script src="{{ asset('plugins/flot-charts/jquery.flot.tooltip.min.js') }}"></script>
-        <script src="{{ asset('js/chart-flot.js')}}"></script>
+        <script src="{{ asset('assets/backend/plugins/flot-charts/jquery.flot.js') }}"></script>
+        <script src="{{ asset('assets/backend/plugins/flot-charts/jquery.flot.categories.js') }}"></script>
+        <script src="{{ asset('assets/backend/plugins/flot-charts/jquery.flot.pie.js') }}"></script>
+        <script src="{{ asset('assets/backend/plugins/flot-charts/curvedLines.js') }}"></script>
+        <script src="{{ asset('assets/backend/plugins/flot-charts/jquery.flot.tooltip.min.js') }}"></script>
+        <script src="{{ asset('assets/backend/js/chart-flot.js')}}"></script>
     @endpush
 @endsection

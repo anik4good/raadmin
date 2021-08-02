@@ -78,7 +78,7 @@ class UserController extends Controller
                 return $badges;
             })
             ->addColumn('action', function ($data) {
-                if ($data->get_roles_single() == 'SuperAdmin') {
+                if ($data->role() == 'SuperAdmin') {
                     return '';
                 }
                 if (Auth::user()->can('manage_user')) {

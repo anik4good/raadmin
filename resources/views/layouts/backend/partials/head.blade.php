@@ -19,14 +19,14 @@
 </style>
 
 
-<script src="{{ asset('js/app.js') }}"></script>
+<script src="{{ asset('assets/backend/js/app.js') }}"></script>
 
 <!-- themekit admin template asstes -->
-<link rel="stylesheet" href="{{ asset('all.css') }}">
-<link rel="stylesheet" href="{{ asset('dist/css/theme.css') }}">
-<link rel="stylesheet" href="{{ asset('plugins/fontawesome-free/css/all.min.css') }}">
-<link rel="stylesheet" href="{{ asset('plugins/icon-kit/dist/css/iconkit.min.css') }}">
-<link rel="stylesheet" href="{{ asset('plugins/ionicons/dist/css/ionicons.min.css') }}">
+<link rel="stylesheet" href="{{ asset('assets/backend/all.css') }}">
+<link rel="stylesheet" href="{{ asset('assets/backend/dist/css/theme.css') }}">
+<link rel="stylesheet" href="{{ asset('assets/backend/plugins/fontawesome-free/css/all.min.css') }}">
+<link rel="stylesheet" href="{{ asset('assets/backend/plugins/icon-kit/dist/css/iconkit.min.css') }}">
+<link rel="stylesheet" href="{{ asset('assets/backend/plugins/ionicons/dist/css/ionicons.min.css') }}">
 
 
 <!-- Stack array for including inline css or head elements -->

@@ -101,16 +101,15 @@
         </div>
     </div>
         <!-- push external js -->
-    @push('script')                
-        <script src="{{ asset('plugins/amcharts/amcharts.js') }}"></script>
-        <script src="{{ asset('plugins/amcharts/gauge.js') }}"></script>
-        <script src="{{ asset('plugins/amcharts/serial.js') }}"></script>
-        <script src="{{ asset('plugins/amcharts/themes/light.js') }}"></script>
-        <script src="{{ asset('plugins/amcharts/animate.min.js') }}"></script>
-        <script src="{{ asset('plugins/amcharts/pie.js') }}"></script>
-        <script src="{{ asset('plugins/ammap3/ammap/ammap.js') }}"></script>
-        <script src="{{ asset('plugins/ammap3/ammap/maps/js/usaLow.js') }}"></script>
-        <script src="{{ asset('js/chart-amcharts.js') }}"></script>
+    @push('script')
+        <script src="{{ asset('assets/backend/plugins/amcharts/amcharts.js') }}"></script>
+        <script src="{{ asset('assets/backend/plugins/amcharts/gauge.js') }}"></script>
+        <script src="{{ asset('assets/backend/plugins/amcharts/serial.js') }}"></script>
+        <script src="{{ asset('assets/backend/plugins/amcharts/themes/light.js') }}"></script>
+        <script src="{{ asset('assets/backend/plugins/amcharts/animate.min.js') }}"></script>
+        <script src="{{ asset('assets/backend/plugins/amcharts/pie.js') }}"></script>
+        <script src="{{ asset('assets/backend/plugins/ammap3/ammap/ammap.js') }}"></script>
+        <script src="{{ asset('assets/backend/plugins/ammap3/ammap/maps/js/usaLow.js') }}"></script>
+        <script src="{{ asset('assets/backend/js/chart-amcharts.js') }}"></script>
     @endpush
 @endsection
-        
