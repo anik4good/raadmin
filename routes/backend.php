@@ -94,7 +94,7 @@ Route::group(['middleware' => 'auth'], function(){
 
 
     // Backups      //only those have manage_backup permission will get access
-    Route::group(['middleware' => 'can:manage_backup','as' => 'settings.', 'prefix' => 'settings'], function(){
+    Route::group(['middleware' => 'can:manage_backup','as' => 'settings.'], function(){
         Route::get('backups', [BackupController::class, 'index'])->name('backups.index');
         Route::post('backups', [BackupController::class, 'store'])->name('backups.store');
         Route::delete('app/backups/{backup} ', [BackupController::class, 'destroy'])->name('backups.destroy');

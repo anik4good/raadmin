@@ -3,7 +3,7 @@
 
 <!-- push external head elements to head -->
 @push('head')
-    <link rel="stylesheet" href="{{ asset('plugins/DataTables/datatables.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/backend/plugins/DataTables/datatables.min.css') }}">
     {{--    sweet alert--}}
     <link rel="stylesheet"
           href="https://cdn.jsdelivr.net/npm/@sweetalert2/themes@3.2.0/wordpress-admin/wordpress-admin.css">
@@ -132,11 +132,12 @@
             @push('js')
             <!-- push external js -->
                 @push('script')
-                    <script src="{{ asset('plugins/DataTables/datatables.min.js') }}"></script>
-                    <script src="{{ asset('js/datatables.js') }}"></script>
+                    <script src="{{ asset('assets/backend/plugins/dropify/js/dropify.min.js') }}"></script>
+                    <script src="{{ asset('assets/backend/plugins/DataTables/datatables.min.js') }}"></script>
+                    <script src="{{ asset('assets/backend/js/datatables.js') }}"></script>
 
                     {{--    sweet alert--}}
                     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9.17.0/dist/sweetalert2.all.min.js"></script>
-                    <script src="{{ asset('js/script.js') }}"></script>
+                    <script src="{{ asset('assets/backend/js/script.js') }}"></script>
     @endpush
     @endpush

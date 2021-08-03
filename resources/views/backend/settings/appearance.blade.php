@@ -4,7 +4,7 @@
     <!-- push external head elements to head -->
     @push('head')
         <!--Dropify css-->
-        <link rel="stylesheet" href="{{ asset('assets/backend/plugins/dropify/dropify.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('assets/backend/plugins/dropify/css/dropify.min.css') }}">
     @endpush
 
 
@@ -105,7 +105,7 @@
     <!-- push external js -->
     @push('script')
         <!--Dropify script-->
-        <script src="{{ asset('assets/backend/plugins/dropify/dropify.min.js') }}"></script>
+        <script src="{{ asset('assets/backend/plugins/dropify/js/dropify.min.js') }}"></script>
         <script>
             $(document).ready(function () {
                 // Dropify

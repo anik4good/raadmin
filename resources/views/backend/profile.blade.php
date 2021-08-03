@@ -6,7 +6,7 @@
         <link rel="stylesheet" href="{{ asset('assets/backend/plugins/select2/dist/css/select2.min.css') }}">
 
         <!--Dropify css-->
-        <link rel="stylesheet" href="{{ asset('assets/backend/plugins/dropify/dropify.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('assets/backend/plugins/dropify/css/dropify.min.css') }}">
     @endpush
 
     <div class="container-fluid">
@@ -466,9 +466,9 @@
 
     <!-- push external js -->
     @push('script')
-        <script src="{{ asset('plugins/select2/dist/js/select2.min.js') }}"></script>
+        <script src="{{ asset('assets/backend/plugins/select2/dist/js/select2.min.js') }}"></script>
         <!--Dropify script-->
-        <script src="{{ asset('assets/backend/plugins/dropify/dropify.min.js') }}"></script>
+        <script src="{{ asset('assets/backend/plugins/dropify/js/dropify.min.js') }}"></script>
         <script>
             $(document).ready(function () {
                 // Dropify
