@@ -16,14 +16,9 @@ class User extends Authenticatable implements HasMedia
 {
     use HasApiTokens,Notifiable,HasRoles,HasFactory,InteractsWithMedia ;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
-    protected $fillable = [
-        'name', 'email', 'password',
-    ];
+    protected $guarded = ['id'];
+
+
 
     /**
      * The attributes that should be hidden for arrays.
@@ -41,6 +36,7 @@ class User extends Authenticatable implements HasMedia
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'last_login_at' => 'datetime',
     ];
 
 
