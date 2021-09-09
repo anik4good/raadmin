@@ -34,8 +34,8 @@
             <div class="col-xl-4 col-lg-4 col-md-4 m-auto">
                 <div class="authentication-form mx-auto">
                     <div class="logo-centered">
-                        <a href="#"><img height="40" src="{{ asset('assets/backend/img/logo.png') }}"
-                                                                   alt="RADMIN"></a>
+                        <a href="#"><img height="50px" src="{{ asset('assets/backend/img/logo-only.png') }}"
+                                                                   alt=""></a>
                     </div>
                     <p>Welcome back! </p>
                     <form method="POST" action="{{ route('login') }}">
