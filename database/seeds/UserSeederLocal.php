@@ -1,0 +1,326 @@
+<?php
+
+    namespace Database\Seeders;
+
+    use App\User;
+    use Carbon\Carbon;
+    use Faker\Factory;
+    use Illuminate\Database\Eloquent\Model;
+    use Illuminate\Database\Seeder;
+    use Illuminate\Support\Facades\Artisan;
+    use Illuminate\Support\Facades\DB;
+    use Illuminate\Support\Facades\Hash;
+    use Illuminate\Support\Str;
+
+    class UserSeederLocal extends Seeder {
+
+        /**
+         * Run the database seeds.
+         *
+         * @return void
+         */
+        public function run()
+        {
+
+            // Reset cached roles and permissions
+            app()[ \Spatie\Permission\PermissionRegistrar::class ]->forgetCachedPermissions();
+            $faker = Factory::create();
+            $model_has_roles = [
+                ['role_id' => 1, 'model_type' => 'App\User', 'model_id' => 1],
+//                ['role_id' => 2, 'model_type' => 'App\User', 'model_id' => 4],
+//                ['role_id' => 3, 'model_type' => 'App\User', 'model_id' => 2],
+
+            ];
+
+
+            $roles = [
+                [
+                    'id' => 1,
+                    'name' => 'SuperAdmin',
+                    'guard_name' => 'web',
+                    'created_at' => Carbon::now(),
+                    'updated_at' => Carbon::now()
+                ],
+                [
+                    'id' => 2,
+                    'name' => 'Admin',
+                    'guard_name' => 'web',
+                    'created_at' => Carbon::now(),
+                    'updated_at' => Carbon::now()
+                ],
+                [
+                    'id' => 3,
+                    'name' => 'User',
+                    'guard_name' => 'web',
+                    'created_at' => Carbon::now(),
+                    'updated_at' => Carbon::now()
+                ],
+
+            ];
+
+            $permissions = [
+                [
+                    'id' => 2,
+                    'name' => 'manage_role',
+                    'guard_name' => 'web',
+                    'created_at' => Carbon::now(),
+                    'updated_at' => Carbon::now()
+                ],
+                [
+                    'id' => 3,
+                    'name' => 'manage_permission',
+                    'guard_name' => 'web',
+                    'created_at' => Carbon::now(),
+                    'updated_at' => Carbon::now()
+                ],
+                [
+                    'id' => 4,
+                    'name' => 'manage_user',
+                    'guard_name' => 'web',
+                    'created_at' => Carbon::now(),
+                    'updated_at' => Carbon::now()
+                ],
+                [
+                    'id' => 5,
+                    'name' => 'manage_backup',
+                    'guard_name' => 'web',
+                    'created_at' => Carbon::now(),
+                    'updated_at' => Carbon::now()
+                ],
+                [
+                    'id' => 6,
+                    'name' => 'manage_profile',
+                    'guard_name' => 'web',
+                    'created_at' => Carbon::now(),
+                    'updated_at' => Carbon::now()
+                ],
+
+                //Main Project  permissions Started
+
+
+
+
+            ];
+
+
+            $role_has_permissions = [
+                ['permission_id' => 6, 'role_id' => 3],
+
+
+            ];
+
+
+            $superAdmin = [
+                [
+                    'id' => 1,
+                    'name' => 'Anik Mustafa',
+                    'email' => 'admin@mail.com',
+                    'email_verified_at' => now(),
+                    'password' => Hash::make('password'),
+                    'remember_token' => Str::random(10),
+                    'last_login_at' => Carbon::now(),
+                    'created_at' => Carbon::now(),
+                    'updated_at' => Carbon::now()
+                ],
+
+            ];
+
+            $users = [
+                [
+                    'id' => 1,
+                    'name' => 'Anik Mustafa',
+                    'email' => 'admin@mail.com',
+                    'email_verified_at' => now(),
+                    'password' => Hash::make('password'),
+                    'remember_token' => Str::random(10),
+                    'last_login_at' => Carbon::now(),
+                    'created_at' => Carbon::now(),
+                    'updated_at' => Carbon::now(),
+                ],
+                [
+                    'id' => 2,
+                    'name' => 'Nobin Haque',
+                    'email' => 'nobinh41@gmail.com',
+                    'email_verified_at' => now(),
+                    'password' => Hash::make('password'),
+                    'remember_token' => Str::random(10),
+                    'last_login_at' => Carbon::now(),
+                    'created_at' => Carbon::now(),
+                    'updated_at' => Carbon::now(),
+                ],
+
+                [
+                    'id' => 3,
+                    'name' => 'Reza Sunny',
+                    'email' => 'ctoon1643@gmail.com',
+                    'email_verified_at' => now(),
+                    'password' => Hash::make('password'),
+                    'remember_token' => Str::random(10),
+                    'created_at' => Carbon::now(),
+                    'updated_at' => Carbon::now(),
+                    'last_login_at' => Carbon::now()
+                ],
+
+
+                [
+                    'id' => 4,
+                    'name' => 'John Doe',
+                    'email' => 'user@mail.com',
+                    'email_verified_at' => now(),
+                    'password' => Hash::make('password'),
+                    'remember_token' => Str::random(10),
+                    'last_login_at' => Carbon::now(),
+                    'created_at' => Carbon::now(),
+                    'updated_at' => Carbon::now(),
+
+                ],
+            ];
+
+
+            $profiles = [
+                [
+                    'user_id' => 1,
+                    'gender' => 'Male',
+                    'phone' => $faker->e164PhoneNumber(),
+                    'occupation' => 'Software Engineer',
+                    'about' => $faker->text(),
+                    'address' => $faker->address(),
+                    'city' => $faker->city(),
+                    'post_code' => $faker->postcode(),
+                    'country' => $faker->country(),
+                    'state' => $faker->state(),
+                    'facebook' => 'nik4good',
+                    'twitter' => '',
+                    'instagram' => 'nik4nobody',
+                    'created_at' => Carbon::now(),
+                    'updated_at' => Carbon::now()
+                ],
+
+                [
+                    'user_id' => 2,
+                    'gender' => 'Male',
+                    'phone' => $faker->e164PhoneNumber(),
+                    'occupation' => 'Student',
+                    'about' => $faker->text(),
+                    'address' => $faker->address(),
+                    'city' => $faker->city(),
+                    'post_code' => $faker->postcode(),
+                    'country' => $faker->country(),
+                    'state' => $faker->state(),
+                    'facebook' => '',
+                    'twitter' => '',
+                    'instagram' => '',
+                    'created_at' => Carbon::now(),
+                    'updated_at' => Carbon::now()
+                ],
+
+                [
+                    'user_id' => 3,
+                    'gender' => 'Male',
+                    'phone' => $faker->e164PhoneNumber(),
+                    'occupation' => 'Student',
+                    'about' => $faker->text(),
+                    'address' => $faker->address(),
+                    'city' => 'Dhaka',
+                    'post_code' => '1215',
+                    'country' => 'Bangladesh',
+                    'state' => 'Dhaka',
+                    'facebook' => '',
+                    'twitter' => '',
+                    'instagram' => '',
+                    'created_at' => Carbon::now(),
+                    'updated_at' => Carbon::now()
+                ],
+
+                [
+                    'user_id' => 4,
+                    'gender' => 'Male',
+                    'phone' => $faker->e164PhoneNumber(),
+                    'occupation' => 'Student',
+                    'about' => $faker->text(),
+                    'address' => $faker->address(),
+                    'city' => 'Dhaka',
+                    'post_code' => '1215',
+                    'country' => 'Bangladesh',
+                    'state' => 'Dhaka',
+                    'facebook' => '',
+                    'twitter' => '',
+                    'instagram' => '',
+                    'created_at' => Carbon::now(),
+                    'updated_at' => Carbon::now()
+                ],
+
+            ];
+
+
+            // General Settings
+            $settings = [
+                ['name' => 'site_title', 'value' => 'Raadmin'],
+                ['name' => 'site_description', 'value' => 'Your Starter kit'],
+                // Logo Settings
+                ['name' => 'site_logo', 'value' => null],
+                ['name' => 'site_favicon', 'value' => null],
+                // Mail Settings
+                ['name' => 'mail_mailer', 'value' => 'smtp'],
+                ['name' => 'mail_host', 'value' => 'smtp.mailtrap.io'],
+                ['name' => 'mail_port', 'value' => '2525'],
+                ['name' => 'mail_username', 'value' => ''],
+                ['name' => 'mail_password', 'value' => ''],
+                ['name' => 'mail_encryption', 'value' => 'TLS'],
+                ['name' => 'mail_from_address', 'value' => ''],
+                ['name' => 'mail_from_name', 'value' => 'Raadmin'],
+
+                // Socialite Settings
+                ['name' => 'facebook_client_id', 'value' => null],
+                ['name' => 'facebook_client_secret', 'value' => null],
+
+                ['name' => 'google_client_id', 'value' => null],
+                ['name' => 'google_client_secret', 'value' => null],
+
+                ['name' => 'github_client_id', 'value' => null],
+                ['name' => 'github_client_secret', 'value' => null],
+            ];
+
+
+            // Query Builder approach
+            DB::table('roles')->insert($roles);
+            DB::table('permissions')->insert($permissions);
+            DB::table('model_has_roles')->insert($model_has_roles);
+            DB::table('users')->insert($users);
+            DB::table('profiles')->insert($profiles);
+            DB::table('role_has_permissions')->insert($role_has_permissions);
+            DB::table('settings')->insert($settings);
+
+
+            $users = User::where('id', '!=', 1)->get();
+
+            foreach ( $users as $user )
+
+            {
+                $user->assignRole('User');
+
+
+            }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        }
+    }
